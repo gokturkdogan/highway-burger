@@ -15,7 +15,7 @@
             <img class="nav__image" src="../../assets/images/categories/tost.png" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">Tostlar</div>
-                <div class="nav__subtitle">Patates & İçecek + 80</div>
+                <div class="nav__subtitle">Patates & İçecek + 80₺</div>
             </div>
             <div class="nav__action">
                 Seçim için tıklayınız
@@ -23,10 +23,10 @@
             </div>
         </div>
         <div class="nav__item">
-            <img class="nav__image" src="../../assets/images/categories/burger.png" alt="burger">
+            <img class="nav__image" src="../../assets/images/categories/sandwiches.png" alt="burger">
             <div class="nav__itemContent">
-                <div class="nav__title">Burgerler</div>
-                <div class="nav__subtitle">110 / 180 gr</div>
+                <div class="nav__title">Sıcak Sandviçler</div>
+                <div class="nav__subtitle">Sosisli & Patso</div>
             </div>
             <div class="nav__action">
                 Seçim için tıklayınız
@@ -34,10 +34,10 @@
             </div>
         </div>
         <div class="nav__item">
-            <img class="nav__image" src="../../assets/images/categories/burger.png" alt="burger">
+            <img class="nav__image" src="../../assets/images/categories/menu.png" alt="burger">
             <div class="nav__itemContent">
-                <div class="nav__title">Burgerler</div>
-                <div class="nav__subtitle">110 / 180 gr</div>
+                <div class="nav__title">Menüler</div>
+                <div class="nav__subtitle">Patates + Kutu İçecek</div>
             </div>
             <div class="nav__action">
                 Seçim için tıklayınız
@@ -45,10 +45,10 @@
             </div>
         </div>
         <div class="nav__item">
-            <img class="nav__image" src="../../assets/images/categories/burger.png" alt="burger">
+            <img class="nav__image" src="../../assets/images/categories/drinks.png" alt="burger">
             <div class="nav__itemContent">
-                <div class="nav__title">Burgerler</div>
-                <div class="nav__subtitle">110 / 180 gr</div>
+                <div class="nav__title">İçecekler</div>
+                <div class="nav__subtitle">Soğuk İçecekler</div>
             </div>
             <div class="nav__action">
                 Seçim için tıklayınız
