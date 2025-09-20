@@ -75,6 +75,7 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
+    padding-bottom: 50px;
 
     &__item {
         position: relative;

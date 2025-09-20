@@ -1,12 +1,14 @@
 <template>
   <div>
     <Header />
-    <router-view></router-view>
+    <router-view class="content"></router-view>
+    <AppBar />
   </div>
 </template>
 
 <script>
 import Header from '../components/base/TheHeader.vue'
+import AppBar from '../components/base/AppBar.vue'
 export default {
   name: "App",
   data() {
@@ -15,9 +17,18 @@ export default {
     };
   },
   components: {
-    Header
+    Header,
+    AppBar
   },
   created() {},
   methods: {},
 };
 </script>
+<style lang="scss" scoped>
+.content {
+  position: absolute;
+  top: 80px;
+  bottom: 65px;
+  overflow-y: scroll;
+}
+</style>

@@ -23,6 +23,11 @@ export default {
 .header {
     box-shadow: #00000014 1px 6px 5px;
     padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     &__banner {
         display: flex;
         justify-content: space-between;
