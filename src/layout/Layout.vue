@@ -3,12 +3,14 @@
     <Header />
     <router-view class="content"></router-view>
     <AppBar />
+    <BurgerModal v-if="isBurgerModalOpen"/>
   </div>
 </template>
 
 <script>
 import Header from '../components/base/TheHeader.vue'
 import AppBar from '../components/base/AppBar.vue'
+import BurgerModal from '../components/burgers/Modal.vue'
 export default {
   name: "App",
   data() {
@@ -18,10 +20,16 @@ export default {
   },
   components: {
     Header,
-    AppBar
+    AppBar,
+    BurgerModal
   },
   created() {},
   methods: {},
+  computed: {
+    isBurgerModalOpen() {
+      return this.$store.getters["burgerModal/getIsModalOpen"];
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

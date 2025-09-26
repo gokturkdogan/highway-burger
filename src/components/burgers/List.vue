@@ -1,6 +1,6 @@
 <template>
     <div class="nav">
-        <div class="nav__item">
+        <div @click="openModal" class="nav__item">
             <img class="nav__image" src="../../assets/images/categories/burger.png" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">Highway Classic Burger</div>
@@ -58,7 +58,11 @@ export default {
         BasketIcon
     },
     created() { },
-    methods: {},
+    methods: {
+        openModal() {
+            this.$store.dispatch("burgerModal/openModal");
+        }
+    },
 };
 </script>
 <style lang="scss" scoped>
