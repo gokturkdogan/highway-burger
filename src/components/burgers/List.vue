@@ -78,14 +78,14 @@ export default {
         justify-content: center;
         width: 100%;
         height: fit-content;
-        height: 100px;
-        padding: 10px;
+        height: 130px;
+        padding: 15px 10px;
         border-radius: 15px;
         margin-top: 20px;
     }
 
     &__image {
-        width: 100px;
+        width: 110px;
         position: absolute;
         top: 50%;
         left: 0;
@@ -94,7 +94,7 @@ export default {
 
     &__itemContent {
         margin-top: 0;
-        margin-left: 50px;
+        margin-left: 60px;
     }
 
     &__title {
@@ -106,7 +106,7 @@ export default {
 
     &__subtitle {
         color: #7a7a7a;
-        font-size: 10px;
+        font-size: 12px;
         margin-top: 5px;
         max-width: 80%;
     }

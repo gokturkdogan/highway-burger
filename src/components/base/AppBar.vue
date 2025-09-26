@@ -1,23 +1,29 @@
 <template>
   <div class="appBar">
-    <div class="appBar__side">
-      <span class="appBar__link -active">
+    <div class="appBar__side -left">
+      <router-link to="/" class="appBar__link" :class="{ '-active': activeRoute === 'Home' }">
         <HomeIcon/>
-      </span>
-      <span class="appBar__link">
-        <HomeIcon/>
-      </span>
+      </router-link>
+      <router-link to="/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'Burgers' }">
+        <BurgerIcon/>
+      </router-link>
+      <router-link to="/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'Toasts' }">
+        <ToastIcon/>
+      </router-link>
     </div>
     <div class="appBar__mid">
       <BasketIcon/>
     </div>
-    <div class="appBar__side">
+    <div class="appBar__side -right">
       <span  class="appBar__link">
-        <HomeIcon/>
+        <SandwichIcon/>
       </span>
       <span class="appBar__link">
-        <HomeIcon />
+        <MenuIcon />
       </span>
+      <router-link to="/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'Drinks' }">
+        <DrinkIcon/>
+      </router-link>
     </div>
   </div>
 </template>
@@ -25,15 +31,29 @@
 <script>
 import HomeIcon from "../../assets/icons/home-icon.vue";
 import BasketIcon from "../../assets/icons/basket-icon.vue";
+import BurgerIcon from "../../assets/icons/burger-icon.vue";
+import SandwichIcon from "../../assets/icons/sandwich-icon.vue";
+import ToastIcon from "../../assets/icons/toast-icon.vue";
+import MenuIcon from "../../assets/icons/menu-icon.vue";
+import DrinkIcon from "../../assets/icons/drink-icon.vue";
 
 export default {
   name: "Appbar",
   components: {
     HomeIcon,
-    BasketIcon
+    BasketIcon,
+    BurgerIcon,
+    SandwichIcon,
+    ToastIcon,
+    MenuIcon,
+    DrinkIcon
   },
   methods: {},
-  computed: {},
+  computed: {
+    activeRoute() {
+      return this.$route.name;
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -44,7 +64,7 @@ export default {
   bottom: 0;
   display: flex;
   justify-content: space-between;
-  padding: 20px 20px 5px 0;
+  padding: 10px 20px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.08) -1px -6px 5px 0px;
   align-items: center;
@@ -72,8 +92,6 @@ export default {
   &__side {
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
-    width: 30%;
   }
 
   &__link {

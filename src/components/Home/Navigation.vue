@@ -1,6 +1,6 @@
 <template>
     <div class="nav">
-        <div class="nav__item">
+        <router-link to="/burgers" class="nav__item">
             <img class="nav__image" src="../../assets/images/categories/burger.png" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">Burgerler</div>
@@ -10,7 +10,7 @@
                 Seçim için tıklayınız
                 <PointerIcon class="nav__actionIcon"/>
             </div>
-        </div>
+        </router-link>
         <div class="nav__item">
             <img class="nav__image" src="../../assets/images/categories/tost.png" alt="burger">
             <div class="nav__itemContent">
@@ -78,6 +78,7 @@ export default {
     padding-bottom: 50px;
 
     &__item {
+        text-decoration: none;
         position: relative;
         background-color: #fff;
         box-shadow: #00000059 0 5px 15px;
@@ -90,6 +91,7 @@ export default {
         padding: 10px;
         border-radius: 15px;
         margin-top: 70px;
+        color: #000;
     }
 
     &__image {
