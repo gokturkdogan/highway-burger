@@ -1,8 +1,50 @@
 import { createStore } from 'vuex';
-import burgerModal from './modules/burgerModal';
+import category from './modules/category';
+import product from './modules/product';
 
 export default createStore({
-  modules: {
-    burgerModal
+  state: {
+    menuOverlay: false,
+    menuWrapper: false,
+    splash: true
   },
+  mutations: {
+    SET_MENU_OVERLAY(state, payload) {
+      state.menuOverlay = payload;
+    },
+    SET_MENU_WRAPPER(state, payload) {
+      state.menuWrapper = payload;
+    },
+    SET_SPLASH(state, payload) {
+      state.splash = payload;
+    }
+  },
+  actions: {
+    openMenu({ commit }) {
+      commit('SET_MENU_OVERLAY', true);
+      setTimeout(() => {
+        commit('SET_MENU_WRAPPER', true);
+      }, 0);
+    },
+    closeMenu({ commit }) {
+      commit('SET_MENU_WRAPPER', false);
+      setTimeout(() => {
+        commit('SET_MENU_OVERLAY', false);
+      }, 300);
+    },
+    removeSplash({ commit }) {
+      setTimeout(() => {
+          commit('SET_SPLASH', false);
+        }, 2000);
+      }
+  },
+  getters: {
+    getMenuOverlay: state => state.menuOverlay,
+    getMenuWrapper: state => state.menuWrapper,
+    getSplash: state => state.splash
+  },
+  modules: {
+    category,
+    product
+  }
 });

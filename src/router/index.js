@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
-import Burgers from '../views/Burgers.vue';
+import Products from '../views/Products.vue';
 
 const routes = [
   {
@@ -9,9 +9,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/burgers',
-    name: 'Burgers',
-    component: Burgers
+    path: '/products/:categorySlug',
+    name: 'Products',
+    component: Products,
+    props: true
   }
 ];
 

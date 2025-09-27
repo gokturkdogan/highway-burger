@@ -1,20 +1,27 @@
 <template>
   <div class="home">
-    <Navigation />
+    <Categories :categories="categories"/>
   </div>
 </template>
 
 <script>
-import Navigation from '../components/Home/Navigation.vue';
+import Categories from '../components/Home/Categories.vue';
 export default {
   name: "App",
   data() {
     return {};
   },
   components: {
-    Navigation
+    Categories
   },
-  created() {},
+  created() {
+    this.$store.dispatch("category/fetchCategories");
+  },
+  computed: {
+    categories() {
+      return this.$store.getters["category/getCategories"];
+    }
+  },
   methods: {},
 };
 </script>

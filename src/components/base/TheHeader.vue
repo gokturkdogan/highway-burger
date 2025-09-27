@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header__banner">
         <img class="header__logo" src="../../assets/images/splash.png" alt="logo">
-        <UserIcon class="header__user"/>
+        <UserIcon @click="openMenu" class="header__user"/>
     </div>
   </div>
 </template>
@@ -16,7 +16,11 @@ export default {
     BurgerIcon
   },
   created() {},
-  methods: {},
+  methods: {
+    openMenu() {
+      this.$store.dispatch('openMenu')
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -39,7 +43,7 @@ export default {
     }
     &__user {
         width: 40px;
-        border: 3px solid rgb(187, 124, 5);
+        border: 3px solid #bb7c05;
         border-radius: 100%;
         padding: 2px;
         fill: rgb(187, 124, 5);

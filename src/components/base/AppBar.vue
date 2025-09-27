@@ -4,10 +4,10 @@
       <router-link to="/" class="appBar__link" :class="{ '-active': activeRoute === 'Home' }">
         <HomeIcon/>
       </router-link>
-      <router-link to="/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'Burgers' }">
+      <router-link @click="setProducts('burgers')" to="/products/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'burgers' }">
         <BurgerIcon/>
       </router-link>
-      <router-link to="/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'Toasts' }">
+      <router-link @click="setProducts('toastes')" to="/products/toastes" class="appBar__link" :class="{ '-active': activeRoute === 'toastes' }">
         <ToastIcon/>
       </router-link>
     </div>
@@ -15,13 +15,13 @@
       <BasketIcon/>
     </div>
     <div class="appBar__side -right">
-      <span  class="appBar__link">
+      <router-link @click="setProducts('sandwiches')" to="/products/sandwiches" class="appBar__link" :class="{ '-active': activeRoute === 'sandwiches' }">
         <SandwichIcon/>
-      </span>
-      <span class="appBar__link">
-        <MenuIcon />
-      </span>
-      <router-link to="/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'Drinks' }">
+      </router-link>
+      <router-link @click="setProducts('menus')" to="/products/menus" class="appBar__link" :class="{ '-active': activeRoute === 'menus' }">
+        <MenuIcon/>
+      </router-link>
+      <router-link @click="setProducts('drinks')" to="/products/drinks" class="appBar__link" :class="{ '-active': activeRoute === 'drinks' }">
         <DrinkIcon/>
       </router-link>
     </div>
@@ -48,10 +48,14 @@ export default {
     MenuIcon,
     DrinkIcon
   },
-  methods: {},
+  methods: {
+    setProducts(category) {
+      this.$store.dispatch('product/fetchProducts', category)
+    }
+  },
   computed: {
     activeRoute() {
-      return this.$route.name;
+      return this.$route.name === 'Home' ? 'Home' : this.$route.params.categorySlug;
     }
   },
 };
