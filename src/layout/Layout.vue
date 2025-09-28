@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header v-if="currentRoute !== 'Login'"/>
+    <Header v-if="!isPreLogin"/>
     <router-view class="content"></router-view>
-    <AppBar  v-if="currentRoute !== 'Login'"/>
+    <AppBar  v-if="!isPreLogin"/>
   </div>
 </template>
 
@@ -23,8 +23,8 @@ export default {
   created() {},
   methods: {},
   computed: {
-    currentRoute() {
-      return this.$route.name;
+    isPreLogin() {
+      return this.$route.name === 'Login' || this.$route.name === 'Register';
     }
   }
 };

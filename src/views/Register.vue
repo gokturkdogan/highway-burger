@@ -1,37 +1,49 @@
 <template>
-    <div class="login">
-        <img class="login__image" src="../assets/images/splash.png" alt="logo" />
-        <form class="login__form">
-            <div class="login__field">
-                <input :class="{ '-active': email }" type="email" id="email" class="login__input" v-model="email"
+    <div class="register">
+        <img class="register__image" src="../assets/images/splash.png" alt="logo" />
+        <form class="register__form">
+            <div class="register__field">
+                <input :class="{ '-active': name }" type="email" id="email" class="register__input" v-model="name"
                     required placeholder=" " />
-                <label for="email" class="login__label">E-Posta</label>
+                <label for="email" class="register__label">İsim</label>
             </div>
-            <div class="login__field">
-                <input :class="{ '-active': password }" :type="passwordType" id="password" class="login__input"
+            <div class="register__field">
+                <input :class="{ '-active': surname }" type="email" id="email" class="register__input" v-model="surname"
+                    required placeholder=" " />
+                <label for="email" class="register__label">Soyisim</label>
+            </div>
+            <div class="register__field">
+                <input :class="{ '-active': email }" type="email" id="email" class="register__input" v-model="email"
+                    required placeholder=" " />
+                <label for="email" class="register__label">E-Posta</label>
+            </div>
+            <div class="register__field">
+                <input :class="{ '-active': phone }" type="email" id="email" class="register__input" v-model="phone"
+                    required placeholder=" " />
+                <label for="email" class="register__label">Telefon Numarası</label>
+            </div>
+            <div class="register__field">
+                <input :class="{ '-active': password }" :type="passwordType" id="password" class="register__input"
                     v-model="password" required placeholder=" " />
-                <label for="password" class="login__label">Şifre</label>
-                <OpenEyeIcon @click="passwordShow = false" v-if="passwordShow" class="login__passwordVisibilty" />
-                <ClosedEyeIcon @click="passwordShow = true" v-else class="login__passwordVisibilty -close" />
+                <label for="password" class="register__label">Şifre</label>
+                <OpenEyeIcon @click="passwordShow = false" v-if="passwordShow" class="register__passwordVisibilty" />
+                <ClosedEyeIcon @click="passwordShow = true" v-else class="register__passwordVisibilty -close" />
             </div>
         </form>
-        <div class="login__forgot">
-            <router-link class="login__forgotLink">Parolamı unuttum</router-link>
-        </div>
-        <button class="login__loginBtn">Giriş yap</button>
-        <div class="login__socials">
-            <span class="login__socialsTitle">Sosyal medya ile giriş yap</span>
-            <div class="login__socialsContainer">
-                <div class="login__social">
-                    <FacebookIcon class="login__socialIcon -facebook" />
+        <button class="register__loginBtn">Üye ol</button>
+        <div class="register__socials">
+            <span class="register__socialsTitle">Sosyal medya ile üye ol</span>
+            <div class="register__socialsContainer">
+                <div class="register__social">
+                    <FacebookIcon class="register__socialIcon -facebook" />
                 </div>
-                <div class="login__social">
-                    <GoogleIcon class="login__socialIcon" />
+                <div class="register__social">
+                    <GoogleIcon class="register__socialIcon" />
                 </div>
             </div>
         </div>
-        <router-link to="register" class="login__register">
-            Henüz üye değil misin? <span>Hemen üye ol</span>
+        <router-link to="login" class="register__register">
+            Zaten üye misin? <span>Hemen giriş yap</span>
         </router-link>
     </div>
 </template>
@@ -51,7 +63,10 @@ export default {
     },
     data() {
         return {
+            name: "",
+            surname: "",
             email: "",
+            phone: "",
             password: "",
             passwordShow: false
         };
@@ -69,15 +84,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
+.register {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    top: 50px;
+    top: 0px;
+    bottom: 0;
 
     &__image {
-        width: 150px;
+        width: 100px;
         margin-bottom: 30px;
     }
 
@@ -87,7 +103,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
     &__field {
@@ -111,8 +127,8 @@ export default {
             border-color: #bb7c05;
         }
 
-        &:focus+.login__label,
-        &:not(:placeholder-shown)+.login__label {
+        &:focus+.register__label,
+        &:not(:placeholder-shown)+.register__label {
             top: 0px;
             left: 15px;
             font-size: 12px;
