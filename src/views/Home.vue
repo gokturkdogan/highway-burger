@@ -7,7 +7,7 @@
 <script>
 import Categories from '../components/Home/Categories.vue';
 export default {
-  name: "App",
+  name: "Home",
   data() {
     return {};
   },

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header />
+    <Header v-if="currentRoute !== 'Login'"/>
     <router-view class="content"></router-view>
-    <AppBar />
+    <AppBar  v-if="currentRoute !== 'Login'"/>
   </div>
 </template>
 
@@ -22,7 +22,11 @@ export default {
   },
   created() {},
   methods: {},
-  computed: {}
+  computed: {
+    currentRoute() {
+      return this.$route.name;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
