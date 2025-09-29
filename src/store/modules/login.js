@@ -29,7 +29,10 @@ const login = {
                 if (strapiMessage === 'Invalid identifier or password') {
                     message = 'E-posta veya şifre hatalı!';
                 }
-                dispatch('notify/showNotify', { message, type: 'error' }, { root: true });
+                if (strapiMessage === 'Your account email is not confirmed') {
+                    message = 'Lütfen E-postanızı doğrulayın';
+                }
+                dispatch('notify/showNotify', { message, type: 'warning' }, { root: true });
                 console.error('Login error:', error.response || error);
                 throw error;
             }
