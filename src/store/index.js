@@ -3,6 +3,7 @@ import category from './modules/category';
 import product from './modules/product';
 import register from './modules/register';
 import notify from './modules/notify';
+import login from './modules/login';
 
 export default createStore({
   state: {
@@ -49,6 +50,7 @@ export default createStore({
     category,
     product,
     register,
-    notify
+    notify,
+    login
   }
 });

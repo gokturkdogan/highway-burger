@@ -16,9 +16,9 @@
             </div>
         </form>
         <div class="login__forgot">
-            <router-link class="login__forgotLink">Parolamı unuttum</router-link>
+            <router-link to="/" class="login__forgotLink">Parolamı unuttum</router-link>
         </div>
-        <button class="login__loginBtn">Giriş yap</button>
+        <button @click="login" class="login__loginBtn">Giriş yap</button>
         <div class="login__socials">
             <span class="login__socialsTitle">Sosyal medya ile giriş yap</span>
             <div class="login__socialsContainer">
@@ -30,8 +30,11 @@
                 </div>
             </div>
         </div>
-        <router-link to="register" class="login__register">
+        <router-link to="/register" class="login__register">
             Henüz üye değil misin? <span>Hemen üye ol</span>
+        </router-link>
+        <router-link to="/" class="login__continue">
+            Misafir olarak devam et <ForwardIcon class="login__continueIcon"/>
         </router-link>
     </div>
 </template>
@@ -41,13 +44,15 @@ import GoogleIcon from '../assets/icons/google-icon.vue'
 import FacebookIcon from '../assets/icons/facebook-icon.vue'
 import OpenEyeIcon from '../assets/icons/eye-open-icon.vue'
 import ClosedEyeIcon from '../assets/icons/eye-closed-icon.vue'
+import ForwardIcon from '../assets/icons/forward-icon.vue'
 export default {
     name: "Login",
     components: {
         GoogleIcon,
         FacebookIcon,
         OpenEyeIcon,
-        ClosedEyeIcon
+        ClosedEyeIcon,
+        ForwardIcon
     },
     data() {
         return {
@@ -62,6 +67,30 @@ export default {
                 return 'text'
             } else {
                 return 'password'
+            }
+        }
+    },
+    methods: {
+        validateInputs() {
+            if (!this.email || !this.password) {
+                this.$store.dispatch('notify/showNotify', { message: 'Tüm alanları doldurmanız gerekiyor!', type: 'warning' });
+                return false;
+            }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(this.email)) {
+                this.$store.dispatch('notify/showNotify', { message: 'Geçerli bir e-posta girin!', type: 'warning' });
+                return false;
+            }
+            return true;
+        },
+        login() {
+            if (this.validateInputs()) {
+                const payload = {
+                    identifier: this.email,
+                    password: this.password,
+                };
+                console.log(payload)
+                this.$store.dispatch('login/login', payload)
             }
         }
     }
@@ -214,6 +243,20 @@ export default {
             text-decoration: underline;
             color: #bb7c05;
         }
+    }
+
+    &__continue {
+        margin-top: 20px;
+        color: black;
+        display: flex;
+        align-items: center;
+        color: #bb7c05;
+        gap: 5px;
+    }
+
+    &__continueIcon {
+        width: 20px;
+        fill: #bb7c05;
     }
 }
 </style>

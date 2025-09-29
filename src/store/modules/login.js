@@ -1,0 +1,52 @@
+import Services from '../../config/_axios';
+import API from '../../api';
+import router from '../../router';
+
+const login = {
+    state: () => ({
+        isLoggedIn: !!localStorage.getItem('jwt'),
+        user: JSON.parse(localStorage.getItem('user')) || null,
+    }),
+    mutations: {
+        SET_LOGIN_STATE(state, payload) {
+            state.isLoggedIn = payload.isLoggedIn;
+            state.user = payload.user || null;
+        }
+    },
+    actions: {
+        async login({ commit, dispatch }, payload) {
+            try {
+                const response = await Services.post(API.login, payload);
+                localStorage.setItem('jwt', response.data.jwt);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                commit('SET_LOGIN_STATE', { isLoggedIn: true, user: response.data.user });
+                dispatch('notify/showNotify', { message: 'Giriş başarılı!', type: 'success' }, { root: true });
+                setTimeout(() => router.push('/'), 1000);
+                return response.data;
+            } catch (error) {
+                let message = 'Giriş sırasında bir hata oluştu!';
+                const strapiMessage = error.response?.data?.error?.message;
+                if (strapiMessage === 'Invalid identifier or password') {
+                    message = 'E-posta veya şifre hatalı!';
+                }
+                dispatch('notify/showNotify', { message, type: 'error' }, { root: true });
+                console.error('Login error:', error.response || error);
+                throw error;
+            }
+        },
+        logout({ commit, dispatch }) {
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('user');
+            commit('SET_LOGIN_STATE', { isLoggedIn: false, user: null });
+            dispatch('notify/showNotify', { message: 'Çıkış yapıldı!', type: 'success' }, { root: true });
+            router.push('/');
+        }
+    },
+    getters: {
+        isLoggedIn: (state) => state.isLoggedIn,
+        currentUser: (state) => state.user,
+    },
+    namespaced: true
+};
+
+export default login;

@@ -45,6 +45,9 @@
         <router-link to="login" class="register__register">
             Zaten üye misin? <span>Hemen giriş yap</span>
         </router-link>
+        <router-link to="/" class="register__continue">
+            Üye olmadan devam et <ForwardIcon class="register__continueIcon"/>
+        </router-link>
     </div>
 </template>
 
@@ -53,13 +56,15 @@ import GoogleIcon from '../assets/icons/google-icon.vue'
 import FacebookIcon from '../assets/icons/facebook-icon.vue'
 import OpenEyeIcon from '../assets/icons/eye-open-icon.vue'
 import ClosedEyeIcon from '../assets/icons/eye-closed-icon.vue'
+import ForwardIcon from '../assets/icons/forward-icon.vue'
 export default {
     name: "Login",
     components: {
         GoogleIcon,
         FacebookIcon,
         OpenEyeIcon,
-        ClosedEyeIcon
+        ClosedEyeIcon,
+        ForwardIcon
     },
     data() {
         return {
@@ -276,6 +281,20 @@ export default {
             text-decoration: underline;
             color: #bb7c05;
         }
+    }
+
+    &__continue {
+        margin-top: 20px;
+        color: black;
+        display: flex;
+        align-items: center;
+        color: #bb7c05;
+        gap: 5px;
+    }
+
+    &__continueIcon {
+        width: 20px;
+        fill: #bb7c05;
     }
 }
 </style>

@@ -25,7 +25,9 @@ const category = {
         }, 1400); 
       } catch (err) {
         commit('SET_LOADER', false);
-        console.error('Kategori çekme hatası:', err);
+        setTimeout(() => {
+          commit('SET_LOADER', false);
+        }, 1400); 
       }
     },
   },

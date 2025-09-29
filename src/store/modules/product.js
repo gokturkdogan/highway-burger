@@ -15,7 +15,7 @@ const product = {
     }
   },
   actions: {
-    async fetchProducts({ commit }, categorySlug) {
+    async fetchProducts({ commit, dispatch }, categorySlug) {
       commit('SET_LOADER', true);
       try {
         const url = API.products.replace('{slug}', categorySlug);
@@ -25,8 +25,11 @@ const product = {
           commit('SET_LOADER', false);
         }, 1400);
       } catch (err) {
-        console.error('Ürünleri çekme hatası:', err);
-        commit('SET_LOADER', false);
+        console.error('Ürünleri çekme hatası:', err.message);
+        setTimeout(() => {
+          commit('SET_LOADER', false);
+          dispatch('notify/showNotify', { message: err.message, type: 'error' }, { root: true });
+        }, 1400); 
       }
     }
   },

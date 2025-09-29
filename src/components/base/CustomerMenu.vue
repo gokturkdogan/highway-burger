@@ -6,10 +6,10 @@
                     <div class="menu__content">
                         <div class="menu__header">
                             <UserIcon class="menu__icon" />
-                            <span v-if="true" class="menu__title">Merhaba Göktürk</span>
+                            <span v-if="isLogin" class="menu__title">Merhaba {{ user.name }}</span>
                             <span v-else class="menu__title">Henüz Giriş Yapmadın</span>
                         </div>
-                        <div v-if="true" class="menu__body">
+                        <div v-if="isLogin" class="menu__body">
                             <div class="menu__item">
                                 <UserIcon class="menu__itemIcon" />
                                 <span class="menu__text">Profilim</span>
@@ -22,20 +22,20 @@
                                 <OrdersIcon class="menu__itemIcon" />
                                 <span class="menu__text">Siparişlerim</span>
                             </div>
-                            <div class="menu__item">
+                            <div @click="logout" class="menu__item">
                                 <LogoutIcon class="menu__itemIcon" />
                                 <span class="menu__text">Çıkış Yap</span>
                             </div>
                         </div>
                         <div v-else class="menu__body">
-                            <div class="menu__item">
+                            <router-link @click="close" to="/login" class="menu__item">
                                 <LoginIcon class="menu__itemIcon" />
                                 <span class="menu__text">Giriş Yap</span>
-                            </div>
-                            <div class="menu__item">
+                            </router-link>
+                            <router-link @click="close" to="/register" class="menu__item">
                                 <RegisterIcon class="menu__itemIcon" />
                                 <span class="menu__text">Üye Ol</span>
-                            </div>
+                            </router-link>
                         </div>
                     </div>
                     <div class="menu__footer">
@@ -68,6 +68,10 @@ export default {
     methods: {
         close() {
             this.$store.dispatch('closeMenu')
+        },
+        async logout() {
+            await this.$store.dispatch('login/logout')
+            this.close()
         }
     },
     computed: {
@@ -76,6 +80,12 @@ export default {
         },
         wrapper() {
             return this.$store.getters["getMenuWrapper"];
+        },
+        isLogin() {
+            return this.$store.getters["login/isLoggedIn"];
+        },
+        user() {
+            return this.$store.getters["login/currentUser"];
         }
     }
 };
@@ -113,7 +123,9 @@ export default {
         box-shadow: #00000014 1px 6px 5px;
     }
 
-    &__title {}
+    &__title {
+        text-transform: capitalize;
+    }
 
     &__icon {
         width: 40px;
@@ -134,6 +146,8 @@ export default {
         display: flex;
         align-items: center;
         gap: 10px;
+        text-decoration: none;
+        color: black;
     }
 
     &__itemIcon {
