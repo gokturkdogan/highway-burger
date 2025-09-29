@@ -10,10 +10,10 @@
                             <span v-else class="menu__title">Henüz Giriş Yapmadın</span>
                         </div>
                         <div v-if="isLogin" class="menu__body">
-                            <div class="menu__item">
+                            <router-link @click="close" to="/profile" class="menu__item">
                                 <UserIcon class="menu__itemIcon" />
                                 <span class="menu__text">Profilim</span>
-                            </div>
+                            </router-link>
                             <div class="menu__item">
                                 <AddressIcon class="menu__itemIcon" />
                                 <span class="menu__text">Adresim</span>

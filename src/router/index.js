@@ -4,6 +4,7 @@ import Products from '../views/Products.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Confirm from '../views/ConfirmEmail.vue';
+import Profile from '../views/Profile.vue';
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/confirm',
     name: 'Confirm',
     component: Confirm,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   }
 ];
 
