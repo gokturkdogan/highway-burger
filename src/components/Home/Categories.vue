@@ -1,10 +1,10 @@
 <template>
     <div class="nav">
-        <router-link v-for="category in categories" :key="category.id" :to="'products/' + category.slug" class="nav__item">
-            <img class="nav__image" :src="cdnUrl + category.image.url" alt="burger">
+        <router-link v-for="category in categories" :key="category.id" :to="'products/' + category.attributes.slug" class="nav__item">
+            <img class="nav__image" :src="cdnUrl + category.attributes.image.data.attributes.url" alt="burger">
             <div class="nav__itemContent">
-                <div class="nav__title">{{ category.name }}</div>
-                <div class="nav__subtitle">{{ category.description }}</div>
+                <div class="nav__title">{{ category.attributes.name }}</div>
+                <div class="nav__subtitle">{{ category.attributes.description }}</div>
             </div>
             <div class="nav__action">
                 Seçim için tıklayınız

@@ -1,11 +1,11 @@
 <template>
     <div class="nav">
         <div v-for="product in products" :key="products.id" class="nav__item" :class="{ '-drink': isDrinks, '-sandwich': isSandwiches }">
-            <img class="nav__image" :src="cdnUrl + product.image.url"  alt="burger">
+            <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url"  alt="burger">
             <div class="nav__itemContent">
-                <div class="nav__title">{{ product.name }}</div>
-                <div class="nav__subtitle">{{ product.description }}</div>
-                <div class="nav__price">{{ product.price }}<span v-if="product.secondPrice">/</span>{{ product.secondPrice }}₺ <span class="nav__suffix">{{ product.extra }}</span></div>
+                <div class="nav__title">{{ product.attributes.name }}</div>
+                <div class="nav__subtitle">{{ product.attributes.description }}</div>
+                <div class="nav__price">{{ product.attributes.price }}<span v-if="product.attributes.secondPrice">/</span>{{ product.attributes.secondPrice }}₺ <span class="nav__suffix">{{ product.attributes.extra }}</span></div>
             </div>
             <div class="nav__action">
                 <BasketIcon class="nav__actionIcon" />

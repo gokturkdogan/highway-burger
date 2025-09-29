@@ -1,6 +1,6 @@
 const api = {
-    categories: "/categories?populate=*",
-    products: "/products?filters[category][slug][$eq]={slug}&populate=*"
+    categories: "/categories?filters[isActive][$eq]=true&populate=*",
+    products: "/products?filters[isActive][$eq]=true&filters[category][slug][$eq]={slug}&populate=*",
 };
 
 export default api;
