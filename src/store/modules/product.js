@@ -21,7 +21,9 @@ const product = {
         const url = API.products.replace('{slug}', categorySlug);
         const res = await Services.get(url);
         await commit('SET_PRODUCTS', res.data.data);
-        commit('SET_LOADER', false);
+        setTimeout(() => {
+          commit('SET_LOADER', false);
+        }, 1400);
       } catch (err) {
         console.error('Ürünleri çekme hatası:', err);
         commit('SET_LOADER', false);

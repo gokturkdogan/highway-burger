@@ -1,16 +1,18 @@
 <template>
   <div class="products">
-    <div v-if="loader">loader</div>
+    <div class="products__loader" v-if="loader"><BurgerSpinner /></div>
     <List v-else :products="products" :isDrinks="isDrinks" :isSandwiches="isSandwiches"/>
   </div>
 </template>
 
 <script>
 import List from '../components/Products/List.vue';
+import BurgerSpinner from '../components/base/BurgerSpinner.vue';
 export default {
   name: "Products",
   components: {
-    List
+    List,
+    BurgerSpinner
   },
   props: {
     categorySlug: {
@@ -41,5 +43,12 @@ export default {
 <style lang="scss" scoped>
 .products {
   padding: 10px;
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  }
 }
 </style>
