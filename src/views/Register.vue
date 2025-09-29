@@ -3,29 +3,29 @@
         <img class="register__image" src="../assets/images/splash.png" alt="logo" />
         <form class="register__form">
             <div class="register__field">
-                <input :class="{ '-active': name }" type="email" id="email" class="register__input" v-model="name"
+                <input :class="{ '-active': name }" type="text" class="register__input" v-model="name"
                     required placeholder=" " />
-                <label for="email" class="register__label">İsim</label>
+                <label class="register__label">İsim</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': surname }" type="email" id="email" class="register__input" v-model="surname"
+                <input :class="{ '-active': surname }" type="text" class="register__input" v-model="surname"
                     required placeholder=" " />
-                <label for="email" class="register__label">Soyisim</label>
+                <label class="register__label">Soyisim</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': email }" type="email" id="email" class="register__input" v-model="email"
+                <input :class="{ '-active': email }" type="email" class="register__input" v-model="email"
                     required placeholder=" " />
-                <label for="email" class="register__label">E-Posta</label>
+                <label class="register__label">E-Posta</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': phone }" type="email" id="email" class="register__input" v-model="phone"
+                <input :class="{ '-active': phone }" type="number" class="register__input" v-model="phone"
                     required placeholder=" " />
-                <label for="email" class="register__label">Telefon Numarası</label>
+                <label class="register__label">Telefon Numarası</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': password }" :type="passwordType" id="password" class="register__input"
+                <input :class="{ '-active': password }" :type="passwordType" class="register__input"
                     v-model="password" required placeholder=" " />
-                <label for="password" class="register__label">Şifre</label>
+                <label class="register__label">Şifre</label>
                 <OpenEyeIcon @click="passwordShow = false" v-if="passwordShow" class="register__passwordVisibilty" />
                 <ClosedEyeIcon @click="passwordShow = true" v-else class="register__passwordVisibilty -close" />
             </div>
@@ -78,6 +78,39 @@ export default {
             } else {
                 return 'password'
             }
+        }
+    },
+    methods: {
+        validateInputs() {
+            if (!this.name || !this.surname || !this.email || !this.phone || !this.password) {
+                console.log('Tüm alanları doldurmanız gerekiyor!');
+                return false;
+            }
+            if (this.name.length < 3) {
+                console.log('İsim en az 3 karakter olmalıdır!');
+                return false;
+            }
+
+            if (this.surname.length < 2) {
+                console.log('Soyisim en az 2 karakter olmalıdır!');
+                return false;
+            }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(this.email)) {
+                console.log('Geçerli bir e-posta girin!');
+                return false;
+            }
+            const phonePattern = /^[0-9+]{10,15}$/;
+            if (!phonePattern.test(this.phone)) {
+                console.log('Geçerli bir telefon numarası girin!');
+                return false;
+            }
+            const passwordPattern = /^(?=.*\d).{6,}$/;
+            if (!passwordPattern.test(this.password)) {
+                console.log('Şifre en az 6 karakter olmalı ve en az bir rakam içermelidir!');
+                return false;
+            }
+            return true;
         }
     }
 };
