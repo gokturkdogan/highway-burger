@@ -3,34 +3,34 @@
         <img class="register__image" src="../assets/images/splash.png" alt="logo" />
         <form class="register__form">
             <div class="register__field">
-                <input :class="{ '-active': name }" type="text" class="register__input" v-model="name"
-                    required placeholder=" " />
+                <input :class="{ '-active': name }" type="text" class="register__input" v-model="name" required
+                    placeholder=" " />
                 <label class="register__label">İsim</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': surname }" type="text" class="register__input" v-model="surname"
-                    required placeholder=" " />
+                <input :class="{ '-active': surname }" type="text" class="register__input" v-model="surname" required
+                    placeholder=" " />
                 <label class="register__label">Soyisim</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': email }" type="email" class="register__input" v-model="email"
-                    required placeholder=" " />
+                <input :class="{ '-active': email }" type="email" class="register__input" v-model="email" required
+                    placeholder=" " />
                 <label class="register__label">E-Posta</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': phone }" type="number" class="register__input" v-model="phone"
-                    required placeholder=" " />
+                <input :class="{ '-active': phone }" type="number" class="register__input" v-model="phone" required
+                    placeholder=" " @input="phone = phone.toString().slice(0, 10)" />
                 <label class="register__label">Telefon Numarası</label>
             </div>
             <div class="register__field">
-                <input :class="{ '-active': password }" :type="passwordType" class="register__input"
-                    v-model="password" required placeholder=" " />
+                <input :class="{ '-active': password }" :type="passwordType" class="register__input" v-model="password"
+                    required placeholder=" " />
                 <label class="register__label">Şifre</label>
                 <OpenEyeIcon @click="passwordShow = false" v-if="passwordShow" class="register__passwordVisibilty" />
                 <ClosedEyeIcon @click="passwordShow = true" v-else class="register__passwordVisibilty -close" />
             </div>
         </form>
-        <button class="register__loginBtn">Üye ol</button>
+        <button @click="register" class="register__loginBtn">Üye ol</button>
         <div class="register__socials">
             <span class="register__socialsTitle">Sosyal medya ile üye ol</span>
             <div class="register__socialsContainer">
@@ -83,34 +83,47 @@ export default {
     methods: {
         validateInputs() {
             if (!this.name || !this.surname || !this.email || !this.phone || !this.password) {
-                console.log('Tüm alanları doldurmanız gerekiyor!');
+                this.$store.dispatch('notify/showNotify', { message: 'Tüm alanları doldurmanız gerekiyor!', type: 'warning' });
                 return false;
             }
             if (this.name.length < 3) {
-                console.log('İsim en az 3 karakter olmalıdır!');
+                this.$store.dispatch('notify/showNotify', { message: 'İsim en az 3 karakter olmalıdır!', type: 'warning' });
                 return false;
             }
 
             if (this.surname.length < 2) {
-                console.log('Soyisim en az 2 karakter olmalıdır!');
+                this.$store.dispatch('notify/showNotify', { message: 'Soyisim en az 2 karakter olmalıdır!', type: 'warning' });
                 return false;
             }
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(this.email)) {
-                console.log('Geçerli bir e-posta girin!');
+                this.$store.dispatch('notify/showNotify', { message: 'Geçerli bir e-posta girin!', type: 'warning' });
                 return false;
             }
             const phonePattern = /^[0-9+]{10,15}$/;
             if (!phonePattern.test(this.phone)) {
-                console.log('Geçerli bir telefon numarası girin!');
+                this.$store.dispatch('notify/showNotify', { message: 'Geçerli bir telefon numarası girin!', type: 'warning' });
                 return false;
             }
             const passwordPattern = /^(?=.*\d).{6,}$/;
             if (!passwordPattern.test(this.password)) {
-                console.log('Şifre en az 6 karakter olmalı ve en az bir rakam içermelidir!');
+                this.$store.dispatch('notify/showNotify', { message: 'Şifre en az 6 karakter olmalı ve en az bir rakam içermelidir!', type: 'warning' });
                 return false;
             }
             return true;
+        },
+        register() {
+            if (this.validateInputs()) {
+                const payload = {
+                    username: this.email,
+                    email: this.email,
+                    password: this.password,
+                    name: this.name,
+                    surname: this.surname,
+                    phone: this.phone.toString()
+                };
+                this.$store.dispatch('register/register', payload)
+            }
         }
     }
 };

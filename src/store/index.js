@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 import category from './modules/category';
 import product from './modules/product';
+import register from './modules/register';
+import notify from './modules/notify';
 
 export default createStore({
   state: {
@@ -34,9 +36,9 @@ export default createStore({
     },
     removeSplash({ commit }) {
       setTimeout(() => {
-          commit('SET_SPLASH', false);
-        }, 2000);
-      }
+        commit('SET_SPLASH', false);
+      }, 2000);
+    }
   },
   getters: {
     getMenuOverlay: state => state.menuOverlay,
@@ -45,6 +47,8 @@ export default createStore({
   },
   modules: {
     category,
-    product
+    product,
+    register,
+    notify
   }
 });
