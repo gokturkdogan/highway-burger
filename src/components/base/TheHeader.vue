@@ -46,7 +46,7 @@ export default {
         border: 3px solid #bb7c05;
         border-radius: 100%;
         padding: 2px;
-        fill: rgb(187, 124, 5);
+        fill: #bb7c05;
     }
 
     &__nav {

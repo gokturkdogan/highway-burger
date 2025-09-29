@@ -24,7 +24,7 @@ export default {
   methods: {},
   computed: {
     isPreLogin() {
-      return this.$route.name === 'Login' || this.$route.name === 'Register';
+      return this.$route.name === 'Login' || this.$route.name === 'Register' || this.$route.name === 'Confirm';
     }
   }
 };

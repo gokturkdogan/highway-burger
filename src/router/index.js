@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Products from '../views/Products.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import Confirm from '../views/ConfirmEmail.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/confirm',
+    name: 'Confirm',
+    component: Confirm,
   }
 ];
 
