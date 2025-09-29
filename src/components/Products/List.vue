@@ -1,11 +1,14 @@
 <template>
     <div class="nav">
-        <div v-for="product in products" :key="products.id" class="nav__item" :class="{ '-drink': isDrinks, '-sandwich': isSandwiches }">
-            <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url"  alt="burger">
+        <div v-for="product in products" :key="products.id" class="nav__item"
+            :class="{ '-drink': isDrinks, '-sandwich': isSandwiches, '-toast': isToastes }">
+            <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">{{ product.attributes.name }}</div>
                 <div class="nav__subtitle">{{ product.attributes.description }}</div>
-                <div class="nav__price">{{ product.attributes.price }}<span v-if="product.attributes.secondPrice">/</span>{{ product.attributes.secondPrice }}₺ <span class="nav__suffix">{{ product.attributes.extra }}</span></div>
+                <div class="nav__price">{{ product.attributes.price }}<span
+                        v-if="product.attributes.secondPrice">/</span>{{ product.attributes.secondPrice }}₺ <span
+                        class="nav__suffix">{{ product.attributes.extra }}</span></div>
             </div>
             <div class="nav__action">
                 <BasketIcon class="nav__actionIcon" />
@@ -16,7 +19,7 @@
 <script>
 import BasketIcon from '../../assets/icons/basket-icon.vue'
 export default {
-    name: "BurgersList",
+    name: "ProductList",
     data() {
         return {
             cdnUrl: 'http://localhost:1337'
@@ -37,6 +40,11 @@ export default {
             defauld: false
         },
         isSandwiches: {
+            type: Boolean,
+            required: false,
+            defauld: false
+        },
+        isToastes: {
             type: Boolean,
             required: false,
             defauld: false
@@ -70,6 +78,10 @@ export default {
 
         &.-drink {
             height: 70px;
+        }
+
+        &.-toast {
+            height: 80px;
         }
     }
 

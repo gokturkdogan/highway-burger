@@ -1,18 +1,26 @@
 <template>
   <div class="products">
-    <div class="products__loader" v-if="loader"><BurgerSpinner /></div>
-    <List v-else :products="products" :isDrinks="isDrinks" :isSandwiches="isSandwiches"/>
+    <div class="products__loader" v-if="loader">
+      <BurgerSpinner />
+    </div>
+    <div v-else>
+      <Empty v-if="isEmpty" />
+      <List v-else="products.lenght" :products="products" :isDrinks="isDrinks" :isSandwiches="isSandwiches"
+        :isToastes="isToastes" />
+    </div>
   </div>
 </template>
 
 <script>
 import List from '../components/Products/List.vue';
 import BurgerSpinner from '../components/base/BurgerSpinner.vue';
+import Empty from '../components/Products/Empty.vue';
 export default {
   name: "Products",
   components: {
     List,
-    BurgerSpinner
+    BurgerSpinner,
+    Empty
   },
   props: {
     categorySlug: {
@@ -36,6 +44,12 @@ export default {
     },
     isSandwiches() {
       return this.$route.params.categorySlug === 'sandwiches';
+    },
+    isToastes() {
+      return this.$route.params.categorySlug === 'toastes';
+    },
+    isEmpty() {
+      return this.products.length === 0;
     }
   },
 };
