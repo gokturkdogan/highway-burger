@@ -4,6 +4,7 @@
     <div v-else class="address__content">
         <List v-if="!addressList" :addressList="addressList"/>
         <Empty v-else/>
+        <Add />
     </div>
   </div>
 </template>
@@ -12,6 +13,7 @@
 import List from '../components/Address/List.vue';
 import BurgerSpinner from '../components/base/BurgerSpinner.vue';
 import Empty from '../components/Address/Empty.vue'
+import Add from '../components/Address/Add.vue'
 export default {
   name: "Home",
   data() {
@@ -20,7 +22,8 @@ export default {
   components: {
     List,
     BurgerSpinner,
-    Empty
+    Empty,
+    Add
   },
   created() {
     this.$store.dispatch("address/fetchAddressList");

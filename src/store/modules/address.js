@@ -4,7 +4,8 @@ import API from '../../api';
 const address = {
     state: () => ({
         addressList: [],
-        loader: false
+        loader: false,
+        isModalOpen: false
     }),
     mutations: {
         SET_ADDRESS_LIST(state, payload) {
@@ -12,6 +13,9 @@ const address = {
         },
         SET_LOADER(state, payload) {
             state.loader = payload;
+        },
+        SET_IS_MODAL_OPEN(state, payload) {
+            state.isModalOpen = payload;
         }
     },
     actions: {
@@ -25,6 +29,7 @@ const address = {
             }
             });
             await commit('SET_ADDRESS_LIST', res.data.addresses);
+            await commit('profile/SET_PROFILE', res.data, { root: true })
             setTimeout(() => {
             commit('SET_LOADER', false);
             }, 1400);
@@ -38,7 +43,8 @@ const address = {
     },
     getters: {
         getAddressList: (state) => state.addressList,
-        getLoader: (state) => state.loader
+        getLoader: (state) => state.loader,
+        getIsModalOpen: (state) => state.isModalOpen
     },
     namespaced: true
 };

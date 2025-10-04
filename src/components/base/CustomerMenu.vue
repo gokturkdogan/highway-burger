@@ -10,14 +10,14 @@
                             <span v-else class="menu__title">Henüz Giriş Yapmadın</span>
                         </div>
                         <div v-if="isLogin" class="menu__body">
-                            <router-link @click="close" to="/profile" class="menu__item">
+                            <router-link @click="close" to="/profile" class="menu__item" :class="{ '-active': activeRoute === 'Profile' }">
                                 <UserIcon class="menu__itemIcon" />
                                 <span class="menu__text">Profilim</span>
                             </router-link>
-                            <div class="menu__item">
+                            <router-link @click="close" to="/address" class="menu__item" :class="{ '-active': activeRoute === 'Address' }">
                                 <AddressIcon class="menu__itemIcon" />
-                                <span class="menu__text">Adresim</span>
-                            </div>
+                                <span class="menu__text">Adreslerim</span>
+                            </router-link>
                             <div class="menu__item">
                                 <OrdersIcon class="menu__itemIcon" />
                                 <span class="menu__text">Siparişlerim</span>
@@ -86,6 +86,9 @@ export default {
         },
         user() {
             return this.$store.getters["login/currentUser"];
+        },
+        activeRoute() {
+            return this.$route.name;
         }
     }
 };
@@ -148,11 +151,22 @@ export default {
         gap: 10px;
         text-decoration: none;
         color: black;
+        border-radius: 15px;
+        padding: 5px;
+
+        &.-active {
+            background-color: #bb7c05;
+            color: white;
+
+            .menu__itemIcon {
+                fill: white;
+            }
+        }
     }
 
     &__itemIcon {
         width: 40px;
-        fill: rgb(187, 124, 5);
+        fill: #bb7c05;
     }
 
     &__text {}
