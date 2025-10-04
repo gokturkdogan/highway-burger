@@ -5,6 +5,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Confirm from '../views/ConfirmEmail.vue';
 import Profile from '../views/Profile.vue';
+import Address from '../views/Address.vue';
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/address',
+    name: 'Address',
+    component: Address,
   }
 ];
 
