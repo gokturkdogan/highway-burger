@@ -2,7 +2,7 @@
   <div class="address">
     <div v-if="loader" class="address__loader"><BurgerSpinner /></div>
     <div v-else class="address__content">
-        <List v-if="!addressList" :addressList="addressList"/>
+        <List v-if="addressList && addressList !== null && addressList.length" :addressList="addressList"/>
         <Empty v-else/>
         <Add />
     </div>
@@ -45,7 +45,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    top: 50px;
+    top: 80px;
 
     &__loader {
         display: flex;

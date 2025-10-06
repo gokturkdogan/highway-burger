@@ -4,21 +4,33 @@
             <template #body>
                 <div class="addAddress">
                     <div class="addAddress__field">
-                        <input :class="{ '-active': title }" type="text" class="addAddress__input" v-model="title"
-                            required placeholder=" " />
-                        <label class="addAddress__label">Adress Başlığı</label>
+                        <CustomInput v-model="title" label="Adress Başlığı" type="text" :required="true" />
                     </div>
                     <div class="addAddress__field">
-                        <input :class="{ '-active': name }" type="text" class="addAddress__input" v-model="name"
-                            required placeholder=" " />
-                        <label class="addAddress__label">İsim</label>
+                        <CustomInput v-model="name" label="İsim" type="text" :required="true" />
                     </div>
                     <div class="addAddress__field">
-                        <input :class="{ '-active': surname }" type="text" class="addAddress__input" v-model="surname"
-                            required placeholder=" " />
-                        <label class="addAddress__label">Soyisim</label>
+                        <CustomInput v-model="surname" label="Soyisim" type="text" :required="true" />
+                    </div>
+                    <div class="addAddress__field">
+                        <CustomSelect v-model="city" :options="cityOptions" label="Şehir" :disabled="true" />
+                    </div>
+                    <div class="addAddress__field">
+                        <CustomSelect v-model="district" :options="districtOptions" label="İlçe" />
+                    </div>
+                    <div class="addAddress__field">
+                        <CustomSelect v-model="neighborhood" :options="neighborhoodOptions" label="Mahalle"
+                            :show-warning="!district" warning-message="Lütfen önce ilçe seçiniz" />
+                    </div>
+                    <div class="addAddress__field">
+                        <CustomTextarea v-model="description" label="Adres Açıklaması" :rows="4" :required="false" />
                     </div>
                 </div>
+            </template>
+            <template #footer>
+                <button class="addAddress__button" @click="addAddress">
+                    Adres Ekle
+                </button>
             </template>
         </Modal>
     </transition>
@@ -26,6 +38,10 @@
 
 <script>
 import Modal from '../base/Modal.vue'
+import CustomSelect from '../base/CustomSelect.vue'
+import CustomInput from '../base/CustomInput.vue'
+import CustomTextarea from '../base/CustomTextarea.vue'
+import { getAllCities, getDistrictsByCity, getNeighborhoodsByDistrict } from '../../config/formOptions.js'
 export default {
     name: "AddAddress",
     data() {
@@ -33,21 +49,90 @@ export default {
             title: '',
             name: '',
             surname: '',
-
+            city: 'istanbul',
+            district: '',
+            neighborhood: '',
+            description: ''
         };
     },
     components: {
-        Modal
+        Modal,
+        CustomSelect,
+        CustomInput,
+        CustomTextarea
     },
     created() { },
     computed: {
         isModalOpen() {
             return this.$store.getters["address/getIsModalOpen"];
+        },
+        cityOptions() {
+            return getAllCities();
+        },
+        districtOptions() {
+            return getDistrictsByCity(this.city);
+        },
+        neighborhoodOptions() {
+            return getNeighborhoodsByDistrict(this.district);
         }
     },
     methods: {
         closeModal() {
             this.$store.commit('address/SET_IS_MODAL_OPEN', false)
+        },
+        validateForm() {
+            const requiredFields = [
+                { field: 'title', label: 'Adres Başlığı' },
+                { field: 'name', label: 'İsim' },
+                { field: 'surname', label: 'Soyisim' },
+                { field: 'district', label: 'İlçe' },
+                { field: 'neighborhood', label: 'Mahalle' }
+            ];
+            const missingFields = requiredFields.filter(item => !this[item.field] || this[item.field].trim() === '');
+            if (missingFields.length > 0) {
+                this.$store.dispatch('notify/showNotify', {
+                    type: 'warning',
+                    message: 'Lütfen tüm alanları doldurun'
+                });
+                return false;
+            }
+
+            return true;
+        },
+        async addAddress() {
+            if (!this.validateForm()) {
+                return;
+            }
+            const addressData = {
+                title: this.title,
+                name: this.name,
+                surname: this.surname,
+                city: this.city,
+                district: this.district,
+                neighborhood: this.neighborhood,
+                description: this.description
+            };
+            await this.$store.dispatch('address/addAddress', addressData);
+            this.resetForm();
+            this.closeModal();
+        },
+        resetForm() {
+            this.title = '';
+            this.name = '';
+            this.surname = '';
+            this.city = 'istanbul';
+            this.district = '';
+            this.neighborhood = '';
+            this.description = '';
+        }
+    },
+    watch: {
+        city(newCity) {
+            this.district = '';
+            this.neighborhood = '';
+        },
+        district(newDistrict) {
+            this.neighborhood = '';
         }
     },
 };
@@ -63,53 +148,42 @@ export default {
         width: calc(100% - 40px);
     }
 
-    &__input {
+    &__button {
         width: 100%;
-        padding: 20px;
-        border: 2px solid #ccc;
+        padding: 16px 24px;
+        background: linear-gradient(135deg, #bb7c05 0%, #a66b04 100%);
+        color: white;
+        border: none;
         border-radius: 20px;
-        outline: none;
         font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(187, 124, 5, 0.3);
 
-        &:focus {
-            border-color: #bb7c05;
+        &:hover {
+            background: linear-gradient(135deg, #a66b04 0%, #8d5a03 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(187, 124, 5, 0.4);
         }
 
-        &.-active {
-            border-color: #bb7c05;
-        }
-
-        &:focus+.addAddress__label,
-        &:not(:placeholder-shown)+.addAddress__label {
-            top: 0px;
-            left: 15px;
-            font-size: 12px;
-            color: #bb7c05;
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(187, 124, 5, 0.3);
         }
 
         &:disabled {
-            background-color: #f5f5f5;
-            border-color: #ddd;
+            background: #ccc;
             cursor: not-allowed;
-            color: #999;
+            transform: none;
+            box-shadow: none;
 
-            &+.addAddress__label {
-                color: #999;
+            &:hover {
+                background: #ccc;
+                transform: none;
+                box-shadow: none;
             }
         }
-    }
-
-    &__label {
-        position: absolute;
-        top: 50%;
-        left: 12px;
-        transform: translateY(-50%);
-        font-size: 16px;
-        color: #999;
-        pointer-events: none;
-        transition: all 0.2s ease;
-        background: white;
-        padding: 0 4px;
     }
 }
 </style>

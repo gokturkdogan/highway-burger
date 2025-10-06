@@ -20,26 +20,68 @@ const address = {
     },
     actions: {
         async fetchAddressList({ commit, dispatch }) {
-        commit('SET_LOADER', true);
-        try {
-            const token = localStorage.getItem('jwt');
-            const res = await Services.get(API.profile, {
-            headers: {
-                Authorization: `Bearer ${token}`
+            commit('SET_LOADER', true);
+            try {
+                const token = localStorage.getItem('jwt');
+                const res = await Services.get(API.profile, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                await commit('SET_ADDRESS_LIST', res.data.addresses || []);
+                await commit('profile/SET_PROFILE', res.data, { root: true })
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                }, 1400);
+            } catch (err) {
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                    dispatch('notify/showNotify', { message: 'Adres Listesi Alınırken Hata Oluştu', type: 'error' }, { root: true });
+                }, 1400);
             }
-            });
-            await commit('SET_ADDRESS_LIST', res.data.addresses);
-            await commit('profile/SET_PROFILE', res.data, { root: true })
-            setTimeout(() => {
-            commit('SET_LOADER', false);
-            }, 1400);
-        } catch (err) {
-            setTimeout(() => {
-            commit('SET_LOADER', false);
-            dispatch('notify/showNotify', { message: 'Adres Listesi Alınırken Hata Oluştu', type: 'error' }, { root: true });
-            }, 1400);
-        }
         },
+        async addAddress({ commit, dispatch, state, rootState }, payload) {
+            commit('SET_LOADER', true);
+            try {
+                const token = localStorage.getItem('jwt');
+                const uniqueId = 'addr_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                const addressWithId = {
+                    ...payload,
+                    id: uniqueId
+                };
+                
+                // addresses alanının null olması durumunda boş array'e çevir
+                const currentAddressList = state.addressList || [];
+                const updatedAddresses = [...currentAddressList, addressWithId];
+                
+                const userId = rootState.profile.profile.id;
+                const updateProfileUrl = API.updateProfile.replace('{id}', userId);
+                await Services.put(updateProfileUrl, {
+                    addresses: updatedAddresses
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                commit('SET_ADDRESS_LIST', updatedAddresses);
+                dispatch('notify/showNotify', {
+                    type: 'success',
+                    title: 'Başarılı',
+                    message: 'Adres başarıyla eklendi!',
+                    duration: 3000
+                }, { root: true });
+                
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                }, 1400);
+                
+            } catch (err) {
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                    dispatch('notify/showNotify', { message: 'Adres Eklenirken Hata Oluştu', type: 'error' }, { root: true });
+                }, 1400);
+            }
+        }
     },
     getters: {
         getAddressList: (state) => state.addressList,

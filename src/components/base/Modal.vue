@@ -90,7 +90,6 @@ export default {
         max-height: 68%;
         background-color: white;
         width: 90%;
-        border-radius: 20px;
     }
 
     &__header {
@@ -134,9 +133,6 @@ export default {
     }
 
     &__footer {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
         padding: 30px;
         margin-top: auto;
     }

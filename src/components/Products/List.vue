@@ -130,7 +130,7 @@ export default {
 
     &__price {
         margin-top: 10px;
-        color: rgb(187, 124, 5);
+        color: #bb7c05;
         font-weight: 600;
     }
 
