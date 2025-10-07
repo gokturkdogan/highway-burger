@@ -25,7 +25,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 101;
+  z-index: 102;
   position: absolute;
 
   &__logo {

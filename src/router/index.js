@@ -6,6 +6,7 @@ import Register from '../views/Register.vue';
 import Confirm from '../views/ConfirmEmail.vue';
 import Profile from '../views/Profile.vue';
 import Address from '../views/Address.vue';
+import Cart from '../views/Cart.vue';
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/address',
     name: 'Address',
     component: Address,
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
   }
 ];
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Splash v-if="splash"/>
+    <Splash v-if="true"/>
     <Layout />
     <Menu />
     <Notify />
@@ -27,6 +27,8 @@ export default {
   },
   created() {
     this.$store.dispatch('removeSplash');
+    this.$store.dispatch('profile/fetchProfile');
+    this.$store.dispatch('cart/fetchCart');
   }
 };
 </script>

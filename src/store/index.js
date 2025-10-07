@@ -6,6 +6,7 @@ import notify from './modules/notify';
 import login from './modules/login';
 import profile from './modules/profile';
 import address from './modules/address';
+import cart from './modules/cart';
 
 export default createStore({
   state: {
@@ -55,6 +56,7 @@ export default createStore({
     notify,
     login,
     profile,
-    address
+    address,
+    cart
   }
 });

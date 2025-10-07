@@ -7,6 +7,7 @@
       <Empty v-if="isEmpty" />
       <List v-else="products.lenght" :products="products" :isDrinks="isDrinks" :isSandwiches="isSandwiches"
         :isToastes="isToastes" />
+      <Detail :product="selectedProduct"/>
     </div>
   </div>
 </template>
@@ -15,12 +16,14 @@
 import List from '../components/Products/List.vue';
 import BurgerSpinner from '../components/base/BurgerSpinner.vue';
 import Empty from '../components/Products/Empty.vue';
+import Detail from '../components/Products/Detail.vue';
 export default {
   name: "Products",
   components: {
     List,
     BurgerSpinner,
-    Empty
+    Empty,
+    Detail
   },
   props: {
     categorySlug: {
@@ -50,6 +53,9 @@ export default {
     },
     isEmpty() {
       return this.products.length === 0;
+    },
+    selectedProduct() {
+      return this.$store.getters["product/getSelectedProduct"]
     }
   },
 };

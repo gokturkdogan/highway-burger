@@ -11,9 +11,10 @@
         <ToastIcon/>
       </router-link>
     </div>
-    <div class="appBar__mid">
+    <router-link to="/cart" class="appBar__mid">
       <BasketIcon/>
-    </div>
+      <span v-if="cartItemCount > 0" class="appBar__badge">{{ cartItemCount }}</span>
+    </router-link>
     <div class="appBar__side -right">
       <router-link @click="setProducts('sandwiches')" to="/products/sandwiches" class="appBar__link" :class="{ '-active': activeRoute === 'sandwiches' }">
         <SandwichIcon/>
@@ -56,6 +57,13 @@ export default {
   computed: {
     activeRoute() {
       return this.$route.name === 'Home' ? 'Home' : this.$route.params.categorySlug;
+    },
+    basket() {
+      return this.$store.getters['cart/getBasket'];
+    },
+    cartItemCount() {
+      const products = this.basket?.products || [];
+      return products.length;
     }
   },
 };
@@ -72,6 +80,7 @@ export default {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.08) -1px -6px 5px 0px;
   align-items: center;
+  z-index: 100;
 
   &__mid {
     display: flex;
@@ -91,6 +100,26 @@ export default {
         width: 50px;
         fill: white;
     }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    width: 10px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    box-shadow: 0 3px 10px rgba(239, 68, 68, 0.5);
+    border: 2px solid white;
+    animation: badgePulse 2s ease-in-out infinite;
   }
 
   &__side {
@@ -115,6 +144,15 @@ export default {
       background: linear-gradient(to top, #f7ae26 0%, transparent 100%);
       clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%);
     }
+  }
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
   }
 }
 </style>

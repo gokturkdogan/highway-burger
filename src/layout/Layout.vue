@@ -2,13 +2,15 @@
   <div>
     <Header v-if="!isPreLogin"/>
     <router-view class="content"></router-view>
-    <AppBar  v-if="!isPreLogin"/>
+    <CartSummaryBar v-if="!isPreLogin"/>
+    <AppBar v-if="!isPreLogin"/>
   </div>
 </template>
 
 <script>
 import Header from '../components/base/TheHeader.vue'
 import AppBar from '../components/base/AppBar.vue'
+import CartSummaryBar from '../components/base/CartSummaryBar.vue'
 export default {
   name: "App",
   data() {
@@ -18,7 +20,8 @@ export default {
   },
   components: {
     Header,
-    AppBar
+    AppBar,
+    CartSummaryBar
   },
   created() {},
   methods: {},

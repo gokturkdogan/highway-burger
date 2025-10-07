@@ -1,6 +1,6 @@
 <template>
     <div class="nav">
-        <div v-for="product in products" :key="products.id" class="nav__item"
+        <div @click="openDetail(product.id)" v-for="product in products" :key="products.id" class="nav__item"
             :class="{ '-drink': isDrinks, '-sandwich': isSandwiches, '-toast': isToastes }">
             <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url" alt="burger">
             <div class="nav__itemContent">
@@ -48,6 +48,11 @@ export default {
             type: Boolean,
             required: false,
             defauld: false
+        }
+    },
+    methods: {
+        openDetail(id) {
+            this.$store.dispatch('product/fetchProductDetail', id)
         }
     }
 };

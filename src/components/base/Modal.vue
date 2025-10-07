@@ -43,7 +43,6 @@ export default {
 .slide-up-enter-from,
 .slide-up-leave-to {
     transform: translateY(120%);
-    /* daha uzun mesafeden gelsin */
     opacity: 0;
 }
 
@@ -81,7 +80,7 @@ export default {
 
     &__wrapper {
         position: absolute;
-        z-index: 1;
+        z-index: 999;
         top: 16%;
         left: 50%;
         transform: translateX(-50%);
