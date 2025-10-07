@@ -47,11 +47,12 @@ export default {
     openAddModal() {
       this.$store.commit('address/SET_IS_MODAL_OPEN', true);
     },
-    deleteAddress(addressId) {
-      console.log('Delete address:', addressId);
+    async deleteAddress(addressId) {
+      await this.$store.dispatch('address/deleteAddress', addressId);
     },
-    editAddress(address) {
-      console.log('Edit address:', address);
+    async editAddress(address) {
+      await this.$store.commit('address/SET_SELECTED_ADDRESS', address);
+      this.$store.commit('address/SET_IS_UPDATE_MODAL_OPEN', true);
     }
   }
 };

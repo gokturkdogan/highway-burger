@@ -1,10 +1,13 @@
 <template>
   <div class="address">
-    <div v-if="loader" class="address__loader"><BurgerSpinner /></div>
+    <div v-if="loader" class="address__loader">
+      <BurgerSpinner />
+    </div>
     <div v-else class="address__content">
-        <List v-if="addressList && addressList !== null && addressList.length" :addressList="addressList"/>
-        <Empty v-else/>
-        <Add />
+      <List v-if="addressList && addressList !== null && addressList.length" :addressList="addressList" />
+      <Empty v-else />
+      <Add />
+      <Update />
     </div>
   </div>
 </template>
@@ -12,8 +15,9 @@
 <script>
 import List from '../components/Address/List.vue';
 import BurgerSpinner from '../components/base/BurgerSpinner.vue';
-import Empty from '../components/Address/Empty.vue'
-import Add from '../components/Address/Add.vue'
+import Empty from '../components/Address/Empty.vue';
+import Add from '../components/Address/Add.vue';
+import Update from '../components/Address/Update.vue'
 export default {
   name: "Home",
   data() {
@@ -23,7 +27,8 @@ export default {
     List,
     BurgerSpinner,
     Empty,
-    Add
+    Add,
+    Update
   },
   created() {
     this.$store.dispatch("address/fetchAddressList");
@@ -41,21 +46,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  top: 80px;
+
+  &__loader {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 20px;
-    top: 80px;
+    height: 60vh;
+  }
 
-    &__loader {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 60vh;
-    }
-
-    &__content {
-        width: 100%;
-    }
+  &__content {
+    width: 100%;
+  }
 }
 </style>

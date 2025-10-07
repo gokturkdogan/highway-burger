@@ -5,7 +5,9 @@ const address = {
     state: () => ({
         addressList: [],
         loader: false,
-        isModalOpen: false
+        isModalOpen: false,
+        isUpdateModalOpen: false,
+        selectedAddress: null
     }),
     mutations: {
         SET_ADDRESS_LIST(state, payload) {
@@ -16,6 +18,12 @@ const address = {
         },
         SET_IS_MODAL_OPEN(state, payload) {
             state.isModalOpen = payload;
+        },
+        SET_IS_UPDATE_MODAL_OPEN(state, payload) {
+            state.isUpdateModalOpen = payload;
+        },
+        SET_SELECTED_ADDRESS(state, payload) {
+            state.selectedAddress = payload;
         }
     },
     actions: {
@@ -49,11 +57,8 @@ const address = {
                     ...payload,
                     id: uniqueId
                 };
-                
-                // addresses alanının null olması durumunda boş array'e çevir
                 const currentAddressList = state.addressList || [];
                 const updatedAddresses = [...currentAddressList, addressWithId];
-                
                 const userId = rootState.profile.profile.id;
                 const updateProfileUrl = API.updateProfile.replace('{id}', userId);
                 await Services.put(updateProfileUrl, {
@@ -70,15 +75,89 @@ const address = {
                     message: 'Adres başarıyla eklendi!',
                     duration: 3000
                 }, { root: true });
-                
+
                 setTimeout(() => {
                     commit('SET_LOADER', false);
                 }, 1400);
-                
             } catch (err) {
                 setTimeout(() => {
                     commit('SET_LOADER', false);
                     dispatch('notify/showNotify', { message: 'Adres Eklenirken Hata Oluştu', type: 'error' }, { root: true });
+                }, 1400);
+            }
+        },
+        async updateAddress({ commit, dispatch, state, rootState }, payload) {
+            commit('SET_LOADER', true);
+            try {
+                const token = localStorage.getItem('jwt');
+                const addressId = state.selectedAddress.id;
+
+                const currentAddressList = state.addressList || [];
+                const updatedAddresses = currentAddressList.map(address => {
+                    if (address.id === addressId) {
+                        return {
+                            ...payload,
+                            id: addressId
+                        };
+                    }
+                    return address;
+                });
+                const userId = rootState.profile.profile.id;
+                const updateProfileUrl = API.updateProfile.replace('{id}', userId);
+                await Services.put(updateProfileUrl, {
+                    addresses: updatedAddresses
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                commit('SET_ADDRESS_LIST', updatedAddresses);
+                dispatch('notify/showNotify', {
+                    type: 'success',
+                    title: 'Başarılı',
+                    message: 'Adres başarıyla güncellendi!',
+                    duration: 3000
+                }, { root: true });
+
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                }, 1400);
+            } catch (err) {
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                    dispatch('notify/showNotify', { message: 'Adres Güncellenirken Hata Oluştu', type: 'error' }, { root: true });
+                }, 1400);
+            }
+        },
+        async deleteAddress({ commit, dispatch, state, rootState }, addressId) {
+            commit('SET_LOADER', true);
+            try {
+                const token = localStorage.getItem('jwt');
+                const currentAddressList = state.addressList || [];
+                const updatedAddresses = currentAddressList.filter(address => address.id !== addressId);
+                const userId = rootState.profile.profile.id;
+                const updateProfileUrl = API.updateProfile.replace('{id}', userId);
+                await Services.put(updateProfileUrl, {
+                    addresses: updatedAddresses
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                commit('SET_ADDRESS_LIST', updatedAddresses);
+                dispatch('notify/showNotify', {
+                    type: 'success',
+                    title: 'Başarılı',
+                    message: 'Adres başarıyla silindi!',
+                    duration: 3000
+                }, { root: true });
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                }, 1400);
+            } catch (err) {
+                setTimeout(() => {
+                    commit('SET_LOADER', false);
+                    dispatch('notify/showNotify', { message: 'Adres Silinirken Hata Oluştu', type: 'error' }, { root: true });
                 }, 1400);
             }
         }
@@ -86,7 +165,9 @@ const address = {
     getters: {
         getAddressList: (state) => state.addressList,
         getLoader: (state) => state.loader,
-        getIsModalOpen: (state) => state.isModalOpen
+        getIsModalOpen: (state) => state.isModalOpen,
+        getIsUpdateModalOpen: (state) => state.isUpdateModalOpen,
+        getSelectedAddress: (state) => state.selectedAddress
     },
     namespaced: true
 };
