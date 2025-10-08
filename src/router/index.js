@@ -10,43 +10,43 @@ import Cart from '../views/Cart.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/coin-actions/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/products/:categorySlug',
+    path: '/coin-actions/products/:categorySlug',
     name: 'Products',
     component: Products,
     props: true
   },
   {
-    path: '/login',
+    path: '/coin-actions/login',
     name: 'Login',
     component: Login,
   },
   {
-    path: '/register',
+    path: '/coin-actions/register',
     name: 'Register',
     component: Register,
   },
   {
-    path: '/confirm',
+    path: '/coin-actions/confirm',
     name: 'Confirm',
     component: Confirm,
   },
   {
-    path: '/profile',
+    path: '/coin-actions/profile',
     name: 'Profile',
     component: Profile,
   },
   {
-    path: '/address',
+    path: '/coin-actions/address',
     name: 'Address',
     component: Address,
   },
   {
-    path: '/cart',
+    path: '/coin-actions/cart',
     name: 'Cart',
     component: Cart,
   }

@@ -26,7 +26,7 @@ const login = {
                 dispatch('profile/fetchProfile', null, { root: true });
                 dispatch('cart/fetchCart', null, { root: true });
                 
-                setTimeout(() => router.push('/'), 1000);
+                setTimeout(() => router.push('/coin-actions/'), 1000);
                 return response.data;
             } catch (error) {
                 let message = 'Giriş sırasında bir hata oluştu!';

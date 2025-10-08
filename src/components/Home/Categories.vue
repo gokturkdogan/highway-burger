@@ -1,6 +1,6 @@
 <template>
     <div class="nav">
-        <router-link v-for="category in categories" :key="category.id" :to="'products/' + category.attributes.slug" class="nav__item">
+        <router-link v-for="category in categories" :key="category.id" :to="'/coin-actions/products/' + category.attributes.slug" class="nav__item">
             <img class="nav__image" :src="cdnUrl + category.attributes.image.data.attributes.url" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">{{ category.attributes.name }}</div>

@@ -42,10 +42,10 @@
                 </div>
             </div>
         </div>
-        <router-link to="login" class="register__register">
+        <router-link to="/coin-actions/login" class="register__register">
             Zaten üye misin? <span>Hemen giriş yap</span>
         </router-link>
-        <router-link to="/" class="register__continue">
+        <router-link to="/coin-actions/" class="register__continue">
             Üye olmadan devam et <ForwardIcon class="register__continueIcon"/>
         </router-link>
     </div>
