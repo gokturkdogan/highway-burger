@@ -5,6 +5,7 @@ const product = {
   state: () => ({
     products: [],
     loader: false,
+    detailLoader: null, // productId'yi tutacak
     isDetailModalOpen: false,
     selectedProduct: {}
   }),
@@ -14,6 +15,9 @@ const product = {
     },
     SET_LOADER(state, payload) {
       state.loader = payload;
+    },
+    SET_DETAIL_LOADER(state, payload) {
+      state.detailLoader = payload;
     },
     SET_IS_DETAIL_MODAL_OPEN(state, payload) {
       state.isDetailModalOpen = payload;
@@ -41,13 +45,16 @@ const product = {
       }
     },
     async fetchProductDetail({ commit, dispatch }, productId) {
+      commit('SET_DETAIL_LOADER', productId); // Tıklanan ürünün ID'sini kaydet
       try {
         const url = API.productDetail.replace('{id}', productId);
         const res = await Services.get(url);
         await commit('SET_SELECTED_PRODUCT', res.data.data);
         commit('SET_IS_DETAIL_MODAL_OPEN', true);
+        commit('SET_DETAIL_LOADER', null); // Loader'ı temizle
       } catch (err) {
         console.error('Ürün detayı çekme hatası:', err.message);
+        commit('SET_DETAIL_LOADER', null); // Loader'ı temizle
         setTimeout(() => {
           dispatch('notify/showNotify', { message: 'Ürün detayı yüklenirken hata oluştu', type: 'error' }, { root: true });
         }, 1400);
@@ -57,6 +64,7 @@ const product = {
   getters: {
     getProducts: (state) => state.products,
     getLoader: (state) => state.loader,
+    getDetailLoader: (state) => state.detailLoader,
     getIsDetailModalOpen: (state) => state.isDetailModalOpen,
     getSelectedProduct: (state) => state.selectedProduct
   },

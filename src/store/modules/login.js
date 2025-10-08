@@ -21,6 +21,11 @@ const login = {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 commit('SET_LOGIN_STATE', { isLoggedIn: true, user: response.data.user });
                 dispatch('notify/showNotify', { message: 'Giriş başarılı!', type: 'success' }, { root: true });
+                
+                // Login olduktan sonra profil ve sepet bilgilerini yükle
+                dispatch('profile/fetchProfile', null, { root: true });
+                dispatch('cart/fetchCart', null, { root: true });
+                
                 setTimeout(() => router.push('/'), 1000);
                 return response.data;
             } catch (error) {
@@ -41,6 +46,11 @@ const login = {
             localStorage.removeItem('jwt');
             localStorage.removeItem('user');
             commit('SET_LOGIN_STATE', { isLoggedIn: false, user: null });
+            
+            // Logout olduğunda profil ve sepet bilgilerini temizle
+            commit('profile/SET_PROFILE', null, { root: true });
+            commit('cart/SET_BASKET', {}, { root: true });
+            
             dispatch('notify/showNotify', { message: 'Çıkış yapıldı!', type: 'success' }, { root: true });
             router.push('/');
         }

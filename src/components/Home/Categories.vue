@@ -15,11 +15,13 @@
 </template>
 <script>
 import PointerIcon from '../../assets/icons/pointer-icon.vue'
+import { CDN_URL } from '../../config/_axios.js'
+
 export default {
     name: "Categories",
     data() {
         return {
-            cdnUrl: 'http://localhost:1337'
+            cdnUrl: CDN_URL
         }
     },
     components: {

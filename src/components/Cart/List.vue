@@ -1,12 +1,6 @@
 <template>
   <div class="cartList">
-    <div v-if="products.length === 0" class="cartList__empty">
-      <div class="cartList__empty-icon">🛒</div>
-      <h3 class="cartList__empty-title">Sepetiniz Boş</h3>
-      <p class="cartList__empty-text">Lezzetli ürünlerimizi keşfedin ve sepetinize ekleyin</p>
-    </div>
-
-    <div v-else class="cartList__items">
+    <div class="cartList__items">
       <div v-for="(product, index) in products" :key="index" class="cartItem">
         <div class="cartItem__image">
           <img :src="product.image" :alt="product.name" />
@@ -102,30 +96,6 @@ export default {
 <style lang="scss" scoped>
 .cartList {
   width: 100%;
-
-  &__empty {
-    text-align: center;
-    padding: 80px 20px;
-    color: #666;
-
-    &-icon {
-      font-size: 64px;
-      margin-bottom: 20px;
-      opacity: 0.5;
-    }
-
-    &-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #333;
-    }
-
-    &-text {
-      font-size: 16px;
-      color: #999;
-    }
-  }
 
   &__items {
     display: flex;

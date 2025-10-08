@@ -25,10 +25,19 @@ export default {
     Menu,
     Notify
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters['login/isLoggedIn'];
+    }
+  },
   created() {
     this.$store.dispatch('removeSplash');
-    this.$store.dispatch('profile/fetchProfile');
-    this.$store.dispatch('cart/fetchCart');
+    
+    // Sadece kullanıcı giriş yaptıysa profil ve sepet bilgilerini çek
+    if (this.isLoggedIn) {
+      this.$store.dispatch('profile/fetchProfile');
+      this.$store.dispatch('cart/fetchCart');
+    }
   }
 };
 </script>

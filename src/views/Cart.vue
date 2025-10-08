@@ -4,7 +4,9 @@
     
     <div v-else class="cart__container">
       <div class="cart__content">
+        <CartEmpty v-if="isEmpty" />
         <CartList 
+          v-else
           :products="products" 
           @increase-quantity="increaseQuantity"
           @decrease-quantity="decreaseQuantity"
@@ -18,6 +20,7 @@
 <script>
 import BurgerSpinner from '../components/base/BurgerSpinner.vue';
 import CartList from '../components/Cart/List.vue';
+import CartEmpty from '../components/Cart/Empty.vue';
 
 export default {
   name: "Cart",
@@ -26,7 +29,8 @@ export default {
   },
   components: {
     BurgerSpinner,
-    CartList
+    CartList,
+    CartEmpty
   },
   created() {
     this.$store.dispatch('cart/fetchCart');
@@ -40,6 +44,9 @@ export default {
     },
     products() {
       return this.basket?.products || [];
+    },
+    isEmpty() {
+      return this.products.length === 0;
     },
     summary() {
       return this.$store.getters['cart/calculateSummary'];

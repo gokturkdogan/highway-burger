@@ -2,31 +2,42 @@
     <div class="nav">
         <div @click="openDetail(product.id)" v-for="product in products" :key="products.id" class="nav__item"
             :class="{ '-drink': isDrinks, '-sandwich': isSandwiches, '-toast': isToastes }">
-            <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url" alt="burger">
-            <div class="nav__itemContent">
-                <div class="nav__title">{{ product.attributes.name }}</div>
-                <div class="nav__subtitle">{{ product.attributes.description }}</div>
-                <div class="nav__price">{{ product.attributes.price }}<span
-                        v-if="product.attributes.secondPrice">/</span>{{ product.attributes.secondPrice }}₺ <span
-                        class="nav__suffix">{{ product.attributes.extra }}</span></div>
-            </div>
-            <div class="nav__action">
-                <BasketIcon class="nav__actionIcon" />
-            </div>
+            <template v-if="detailLoader === product.id">
+                <div class="nav__loader">
+                    <ItemLoader />
+                </div>
+            </template>
+            <template v-else>
+                <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url" alt="burger">
+                <div class="nav__itemContent">
+                    <div class="nav__title">{{ product.attributes.name }}</div>
+                    <div class="nav__subtitle">{{ product.attributes.description }}</div>
+                    <div class="nav__price">{{ product.attributes.price }}<span
+                            v-if="product.attributes.secondPrice">/</span>{{ product.attributes.secondPrice }}₺ <span
+                            class="nav__suffix">{{ product.attributes.extra }}</span></div>
+                </div>
+                <div class="nav__action">
+                    <BasketIcon class="nav__actionIcon" />
+                </div>
+            </template>
         </div>
     </div>
 </template>
 <script>
 import BasketIcon from '../../assets/icons/basket-icon.vue'
+import ItemLoader from '../base/ItemLoader.vue'
+import { CDN_URL } from '../../config/_axios.js'
+
 export default {
     name: "ProductList",
     data() {
         return {
-            cdnUrl: 'http://localhost:1337'
+            cdnUrl: CDN_URL
         }
     },
     components: {
-        BasketIcon
+        BasketIcon,
+        ItemLoader
     },
     props: {
         products: {
@@ -48,6 +59,11 @@ export default {
             type: Boolean,
             required: false,
             defauld: false
+        }
+    },
+    computed: {
+        detailLoader() {
+            return this.$store.getters['product/getDetailLoader'];
         }
     },
     methods: {
@@ -142,6 +158,15 @@ export default {
     &__suffix {
         color: #7a7a7a;
         font-size: 10px;
+    }
+
+    &__loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        min-height: 80px;
     }
 }
 </style>
