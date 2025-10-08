@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Splash v-if="true"/>
+    <Splash v-if="splash"/>
     <Layout />
     <Menu />
     <Notify />
