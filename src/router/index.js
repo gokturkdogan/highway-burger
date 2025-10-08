@@ -10,43 +10,43 @@ import Cart from '../views/Cart.vue';
 
 const routes = [
   {
-    path: '/coin-actions/',
+    path: '/highway-burger/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/coin-actions/products/:categorySlug',
+    path: '/highway-burger/products/:categorySlug',
     name: 'Products',
     component: Products,
     props: true
   },
   {
-    path: '/coin-actions/login',
+    path: '/highway-burger/login',
     name: 'Login',
     component: Login,
   },
   {
-    path: '/coin-actions/register',
+    path: '/highway-burger/register',
     name: 'Register',
     component: Register,
   },
   {
-    path: '/coin-actions/confirm',
+    path: '/highway-burger/confirm',
     name: 'Confirm',
     component: Confirm,
   },
   {
-    path: '/coin-actions/profile',
+    path: '/highway-burger/profile',
     name: 'Profile',
     component: Profile,
   },
   {
-    path: '/coin-actions/address',
+    path: '/highway-burger/address',
     name: 'Address',
     component: Address,
   },
   {
-    path: '/coin-actions/cart',
+    path: '/highway-burger/cart',
     name: 'Cart',
     component: Cart,
   }

@@ -1,28 +1,28 @@
 <template>
   <div class="appBar">
     <div class="appBar__side -left">
-      <router-link to="/coin-actions/" class="appBar__link" :class="{ '-active': activeRoute === 'Home' }">
+      <router-link to="/highway-burger/" class="appBar__link" :class="{ '-active': activeRoute === 'Home' }">
         <HomeIcon/>
       </router-link>
-      <router-link @click="setProducts('burgers')" to="/coin-actions/products/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'burgers' }">
+      <router-link @click="setProducts('burgers')" to="/highway-burger/products/burgers" class="appBar__link" :class="{ '-active': activeRoute === 'burgers' }">
         <BurgerIcon/>
       </router-link>
-      <router-link @click="setProducts('toastes')" to="/coin-actions/products/toastes" class="appBar__link" :class="{ '-active': activeRoute === 'toastes' }">
+      <router-link @click="setProducts('toastes')" to="/highway-burger/products/toastes" class="appBar__link" :class="{ '-active': activeRoute === 'toastes' }">
         <ToastIcon/>
       </router-link>
     </div>
-    <router-link to="/coin-actions/cart" class="appBar__mid">
+    <router-link to="/highway-burger/cart" class="appBar__mid">
       <BasketIcon/>
       <span v-if="cartItemCount > 0" class="appBar__badge">{{ cartItemCount }}</span>
     </router-link>
     <div class="appBar__side -right">
-      <router-link @click="setProducts('sandwiches')" to="/coin-actions/products/sandwiches" class="appBar__link" :class="{ '-active': activeRoute === 'sandwiches' }">
+      <router-link @click="setProducts('sandwiches')" to="/highway-burger/products/sandwiches" class="appBar__link" :class="{ '-active': activeRoute === 'sandwiches' }">
         <SandwichIcon/>
       </router-link>
-      <router-link @click="setProducts('menus')" to="/coin-actions/products/menus" class="appBar__link" :class="{ '-active': activeRoute === 'menus' }">
+      <router-link @click="setProducts('menus')" to="/highway-burger/products/menus" class="appBar__link" :class="{ '-active': activeRoute === 'menus' }">
         <MenuIcon/>
       </router-link>
-      <router-link @click="setProducts('drinks')" to="/coin-actions/products/drinks" class="appBar__link" :class="{ '-active': activeRoute === 'drinks' }">
+      <router-link @click="setProducts('drinks')" to="/highway-burger/products/drinks" class="appBar__link" :class="{ '-active': activeRoute === 'drinks' }">
         <DrinkIcon/>
       </router-link>
     </div>

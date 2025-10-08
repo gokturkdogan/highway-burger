@@ -16,7 +16,7 @@
             </div>
         </form>
         <div class="login__forgot">
-            <router-link to="/coin-actions/" class="login__forgotLink">Parolamı unuttum</router-link>
+            <router-link to="/highway-burger/" class="login__forgotLink">Parolamı unuttum</router-link>
         </div>
         <button @click="login" class="login__loginBtn">Giriş yap</button>
         <div class="login__socials">
@@ -30,10 +30,10 @@
                 </div>
             </div>
         </div>
-        <router-link to="/coin-actions/register" class="login__register">
+        <router-link to="/highway-burger/register" class="login__register">
             Henüz üye değil misin? <span>Hemen üye ol</span>
         </router-link>
-        <router-link to="/coin-actions/" class="login__continue">
+        <router-link to="/highway-burger/" class="login__continue">
             Misafir olarak devam et <ForwardIcon class="login__continueIcon"/>
         </router-link>
     </div>
