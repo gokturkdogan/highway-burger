@@ -103,7 +103,8 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    top: 50px;
+    top: 0;
+    bottom: 0;
 
     &__image {
         width: 150px;
