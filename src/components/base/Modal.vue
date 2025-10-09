@@ -149,5 +149,17 @@ export default {
             }
         }
     }
+
+    &.-deleteProduct {
+        #{$self} {
+            &__wrapper {
+                border-radius: 20px;
+            }
+
+            &__header {
+                border-radius: 20px 20px 0 0;
+            }
+        }
+    }
 }
 </style>

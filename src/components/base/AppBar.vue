@@ -11,7 +11,7 @@
         <ToastIcon/>
       </router-link>
     </div>
-    <router-link to="/highway-burger/cart" class="appBar__mid">
+    <router-link to="/highway-burger/cart" class="appBar__mid" :class="{ '-has-items': cartItemCount > 0 }">
       <BasketIcon/>
       <span v-if="cartItemCount > 0" class="appBar__badge">{{ cartItemCount }}</span>
     </router-link>
@@ -166,7 +166,8 @@ export default {
         transition: all 0.4s ease;
     }
 
-    &:hover {
+    &:hover,
+    &.-has-items {
       transform: translateX(-50%) translateY(-10px) scale(1.12);
       box-shadow: 0 18px 50px rgba(187, 124, 5, 0.55),
                   0 8px 25px rgba(0, 0, 0, 0.3),
@@ -194,7 +195,7 @@ export default {
     color: white;
     font-size: 13px;
     font-weight: 800;
-    min-width: 26px;
+    width: 10px;
     height: 26px;
     border-radius: 50%;
     display: flex;
@@ -396,7 +397,7 @@ export default {
     }
 
     &__badge {
-      min-width: 24px;
+      width: 10px;
       height: 24px;
       font-size: 12px;
       top: -6px;
@@ -440,7 +441,7 @@ export default {
     }
 
     &__badge {
-      min-width: 22px;
+      width: 10px;
       height: 22px;
       font-size: 11px;
       top: -5px;

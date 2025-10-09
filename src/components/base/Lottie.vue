@@ -38,6 +38,11 @@ export default {
       animationData: this.animationData
     });
 
+    // Complete event listener
+    this.anim.addEventListener('complete', () => {
+      this.$emit('complete');
+    });
+
     this.$refs.container.style.width = typeof this.width === 'number' ? this.width + 'px' : this.width;
     this.$refs.container.style.height = typeof this.height === 'number' ? this.height + 'px' : this.height;
   },

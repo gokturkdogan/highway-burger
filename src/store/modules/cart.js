@@ -82,8 +82,29 @@ const cart = {
         // products array'ini al veya boş array oluştur
         const currentProducts = currentBasket.products || [];
         
-        // Yeni ürünü ekle
-        const updatedProducts = [...currentProducts, product];
+        // Aynı ürün var mı kontrol et (productId + priceOption + category ile)
+        const existingProductIndex = currentProducts.findIndex(item => 
+          item.productId === product.productId && 
+          item.priceOption === product.priceOption
+        );
+        
+        let updatedProducts;
+        
+        if (existingProductIndex !== -1) {
+          // Ürün zaten var, quantity'sini arttır
+          updatedProducts = currentProducts.map((item, index) => {
+            if (index === existingProductIndex) {
+              return {
+                ...item,
+                quantity: (item.quantity || 1) + (product.quantity || 1)
+              };
+            }
+            return item;
+          });
+        } else {
+          // Yeni ürün, ekle
+          updatedProducts = [...currentProducts, product];
+        }
         
         // Güncellenmiş basket objesi
         const updatedBasket = {
