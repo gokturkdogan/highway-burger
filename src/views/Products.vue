@@ -62,7 +62,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .products {
-  padding: 10px;
+  padding: 10px 5px 100px 15px;
 
   &__loader {
     display: flex;
