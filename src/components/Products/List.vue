@@ -166,8 +166,6 @@ export default {
         top: 50%;
         left: 0;
         transform: translate(-50%, -50%) scale(1.15) rotate(-3deg);
-        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28))
-                drop-shadow(0 3px 8px rgba(0, 0, 0, 0.18));
         transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1;
     }

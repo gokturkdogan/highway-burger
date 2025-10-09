@@ -198,7 +198,6 @@ export default {
       height: 100%;
       object-fit: cover;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
     }
 
     &::before {

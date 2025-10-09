@@ -147,7 +147,6 @@ export default {
         width: 48px;
         height: 48px;
         fill: #bb7c05;
-        filter: drop-shadow(0 2px 6px rgba(187, 124, 5, 0.35));
     }
 
     &__content {

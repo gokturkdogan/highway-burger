@@ -162,7 +162,6 @@ export default {
     svg {
         width: 50px;
         fill: white;
-        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
         transition: all 0.4s ease;
     }
 
@@ -177,7 +176,6 @@ export default {
 
       svg {
         transform: scale(1.15) rotate(8deg);
-        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
       }
     }
 

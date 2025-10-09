@@ -101,7 +101,6 @@ export default {
         width: 44px;
         height: 44px;
         flex-shrink: 0;
-        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
     }
 
     &__message {

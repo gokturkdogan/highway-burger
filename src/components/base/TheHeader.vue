@@ -58,12 +58,10 @@ export default {
         height: 50px;
         flex-shrink: 0;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        filter: drop-shadow(0 4px 12px rgba(187, 124, 5, 0.2));
         animation: logoFloat 3s ease-in-out infinite;
         
         &:hover {
             transform: rotate(360deg) scale(1.1);
-            filter: drop-shadow(0 6px 16px rgba(187, 124, 5, 0.4));
         }
     }
     

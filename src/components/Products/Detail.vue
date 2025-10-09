@@ -584,7 +584,6 @@ export default {
             width: 100%;
             height: 100%;
             fill: white;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
             position: relative;
             z-index: 2;
         }

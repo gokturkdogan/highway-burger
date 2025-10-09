@@ -170,7 +170,6 @@ export default {
         top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
-        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.3)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
