@@ -188,8 +188,8 @@ export default {
   &__badge {
     position: absolute;
     top: -8px;
-    right: -8px;
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    right: 0;
+    background: #ef4444;
     color: white;
     font-size: 13px;
     font-weight: 800;
@@ -200,10 +200,6 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 0;
-    box-shadow: 0 5px 18px rgba(239, 68, 68, 0.65),
-                0 0 0 3px white,
-                inset 0 1px 3px rgba(255, 255, 255, 0.5);
-    animation: badgePulse 2s ease-in-out infinite;
     border: 3px solid white;
     letter-spacing: -0.5px;
     min-width: 20px;
@@ -389,7 +385,7 @@ export default {
       height: 18px;
       font-size: 12px;
       top: -6px;
-      right: -6px;
+      right: 0;
     }
   }
 }
@@ -433,7 +429,7 @@ export default {
       height: 16px;
       font-size: 11px;
       top: -5px;
-      right: -5px;
+      right: 0;
       border: 2px solid white;
     }
   }
