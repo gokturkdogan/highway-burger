@@ -105,7 +105,7 @@ export default {
     &__overlay {
         background-color: rgba(0, 0, 0, 0.55);
         backdrop-filter: blur(4px);
-        height: 100vh;
+        height: 100%;
         display: flex;
         justify-content: flex-end;
         transition: all 0.3s ease;
@@ -114,7 +114,6 @@ export default {
     &__wrapper {
         width: 70%;
         background: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
-        height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
