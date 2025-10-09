@@ -148,18 +148,19 @@ export default {
 .productDetail {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 
     &__image {
         width: 100%;
-        height: 200px;
+        height: 160px;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 16px;
+        border-radius: 14px;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
+        flex-shrink: 0;
 
         &::before {
             content: '';
@@ -187,17 +188,17 @@ export default {
     &__content {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
     }
 
     &__header {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 5px;
     }
 
     &__name {
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 700;
         color: #212529;
         margin: 0;
@@ -207,7 +208,7 @@ export default {
     &__category {
         display: inline-flex;
         align-items: center;
-        padding: 4px 10px;
+        padding: 4px 9px;
         background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
         color: #bb7c05;
         border-radius: 6px;
@@ -218,33 +219,33 @@ export default {
     }
 
     &__description {
-        font-size: 14px;
+        font-size: 13px;
         color: #495057;
-        line-height: 1.5;
+        line-height: 1.45;
         margin: 0;
-        padding: 12px;
+        padding: 10px 12px;
         background: #f8f9fa;
-        border-radius: 10px;
+        border-radius: 9px;
         border-left: 3px solid #bb7c05;
     }
 
     &__extra {
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 10px 14px;
+        gap: 7px;
+        padding: 8px 12px;
         background: white;
         border: 2px solid #e9ecef;
-        border-radius: 10px;
+        border-radius: 9px;
 
         &-label {
-            font-size: 13px;
+            font-size: 12px;
             color: #6c757d;
             font-weight: 600;
         }
 
         &-value {
-            font-size: 14px;
+            font-size: 13px;
             color: #bb7c05;
             font-weight: 700;
         }
@@ -252,16 +253,16 @@ export default {
 
     &__pricing {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 10px;
-        margin-top: 4px;
+        grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+        gap: 9px;
+        margin-top: 3px;
     }
 
     &__price {
         display: flex;
         flex-direction: column;
-        gap: 6px;
-        padding: 12px 14px;
+        gap: 5px;
+        padding: 11px 13px;
         background: white;
         border: 3px solid #e9ecef;
         border-radius: 10px;
@@ -293,17 +294,17 @@ export default {
             &::after {
                 content: '✓';
                 position: absolute;
-                top: 6px;
-                right: 6px;
-                width: 20px;
-                height: 20px;
+                top: 4px;
+                right: 4px;
+                width: 18px;
+                height: 18px;
                 background: white;
                 color: #bb7c05;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 12px;
+                font-size: 11px;
                 font-weight: 700;
             }
 
@@ -314,7 +315,7 @@ export default {
         }
 
         &-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #6c757d;
             font-weight: 600;
             text-transform: uppercase;
@@ -323,7 +324,7 @@ export default {
         }
 
         &-value {
-            font-size: 19px;
+            font-size: 18px;
             color: #bb7c05;
             font-weight: 700;
             transition: color 0.3s ease;
@@ -332,15 +333,16 @@ export default {
 
     &__footer {
         width: 100%;
+        margin-top: 6px;
     }
 
     &__addButton {
         width: 100%;
-        padding: 14px 24px;
+        padding: 13px 22px;
         background: linear-gradient(135deg, #bb7c05 0%, #a66b04 100%);
         color: white;
         border: none;
-        border-radius: 16px;
+        border-radius: 14px;
         font-size: 15px;
         font-weight: 600;
         cursor: pointer;
@@ -362,16 +364,61 @@ export default {
 
 @media (max-width: 768px) {
     .productDetail {
+        gap: 10px;
+        
         &__image {
-            height: 250px;
+            height: 135px;
         }
 
         &__name {
-            font-size: 20px;
+            font-size: 18px;
+        }
+
+        &__description {
+            font-size: 13px;
+            padding: 9px 11px;
         }
 
         &__pricing {
             grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        &__price {
+            padding: 10px 12px;
+        }
+
+        &__addButton {
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    .productDetail {
+        gap: 9px;
+        
+        &__image {
+            height: 115px;
+        }
+
+        &__name {
+            font-size: 17px;
+        }
+
+        &__description {
+            font-size: 12px;
+            line-height: 1.35;
+            padding: 8px 10px;
+        }
+        
+        &__price {
+            padding: 9px 11px;
+        }
+        
+        &__addButton {
+            padding: 11px 18px;
         }
     }
 }

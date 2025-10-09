@@ -12,13 +12,13 @@ const routes = [
   {
     path: '/highway-burger/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/highway-burger/products/:categorySlug',
     name: 'Products',
     component: Products,
-    props: true
+    props: true,
   },
   {
     path: '/highway-burger/login',
@@ -39,16 +39,19 @@ const routes = [
     path: '/highway-burger/profile',
     name: 'Profile',
     component: Profile,
+    meta: { title: 'Profilim' }
   },
   {
     path: '/highway-burger/address',
     name: 'Address',
     component: Address,
+    meta: { title: 'Adreslerim' }
   },
   {
     path: '/highway-burger/cart',
     name: 'Cart',
     component: Cart,
+    meta: { title: 'Sepetim' }
   }
 ];
 
