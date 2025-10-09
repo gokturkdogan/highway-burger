@@ -1,6 +1,7 @@
 <template>
     <div class="nav">
-        <router-link v-for="category in categories" :key="category.id" :to="'/highway-burger/products/' + category.attributes.slug" class="nav__item">
+        <div v-for="category in categories" :key="category.id" @click="handleCategoryClick(category.attributes.slug)"
+            :class="['nav__item', { '-clicked': clickedId === category.id }]">
             <img class="nav__image" :src="category.attributes.image.data.attributes.url" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">{{ category.attributes.name }}</div>
@@ -8,9 +9,9 @@
             </div>
             <div class="nav__action">
                 Seçim için tıklayınız
-                <PointerIcon class="nav__actionIcon"/>
+                <PointerIcon class="nav__actionIcon" />
             </div>
-        </router-link>
+        </div>
     </div>
 </template>
 <script>
@@ -19,7 +20,9 @@ import PointerIcon from '../../assets/icons/pointer-icon.vue'
 export default {
     name: "Categories",
     data() {
-        return {}
+        return {
+            clickedId: null
+        }
     },
     components: {
         PointerIcon
@@ -30,7 +33,15 @@ export default {
             required: true
         }
     },
-    methods: {},
+    methods: {
+        handleCategoryClick(slug) {
+            const clickedCategory = this.categories.find(cat => cat.attributes.slug === slug);
+            this.clickedId = clickedCategory.id;
+            setTimeout(() => {
+                this.$router.push('/highway-burger/products/' + slug);
+            }, 1000);
+        }
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -46,8 +57,8 @@ export default {
         position: relative;
         background: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18),
-                    0 3px 8px rgba(0, 0, 0, 0.12),
-                    0 1px 3px rgba(0, 0, 0, 0.08);
+            0 3px 8px rgba(0, 0, 0, 0.12),
+            0 1px 3px rgba(0, 0, 0, 0.08);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -59,6 +70,7 @@ export default {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         border: 2px solid rgba(0, 0, 0, 0.06);
         background-clip: padding-box;
+        cursor: pointer;
 
         &::before {
             content: '';
@@ -67,10 +79,10 @@ export default {
             left: 0;
             right: 0;
             height: 50%;
-            background: radial-gradient(ellipse at top, 
-                rgba(187, 124, 5, 0.04) 0%, 
-                rgba(212, 150, 36, 0.02) 40%,
-                transparent 80%);
+            background: radial-gradient(ellipse at top,
+                    rgba(187, 124, 5, 0.04) 0%,
+                    rgba(212, 150, 36, 0.02) 40%,
+                    transparent 80%);
             opacity: 1;
             transition: all 0.5s ease;
             border-radius: 26px 26px 0 0;
@@ -80,29 +92,30 @@ export default {
             content: '';
             position: absolute;
             inset: -2px;
-            background: linear-gradient(135deg, 
-                rgba(187, 124, 5, 0.15) 0%, 
-                rgba(212, 150, 36, 0.25) 50%,
-                rgba(187, 124, 5, 0.15) 100%);
+            background: linear-gradient(135deg,
+                    rgba(187, 124, 5, 0.15) 0%,
+                    rgba(212, 150, 36, 0.25) 50%,
+                    rgba(187, 124, 5, 0.15) 100%);
             border-radius: 26px;
             opacity: 0;
             transition: opacity 0.5s ease;
             z-index: -1;
         }
 
-        &:hover {
+        &:hover,
+        &.-clicked {
             transform: translateY(-12px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25),
-                        0 10px 20px rgba(0, 0, 0, 0.18),
-                        0 5px 10px rgba(187, 124, 5, 0.2),
-                        0 2px 5px rgba(0, 0, 0, 0.12);
+                0 10px 20px rgba(0, 0, 0, 0.18),
+                0 5px 10px rgba(187, 124, 5, 0.2),
+                0 2px 5px rgba(0, 0, 0, 0.12);
             border-color: rgba(187, 124, 5, 0.25);
 
             &::before {
-                background: radial-gradient(ellipse at top, 
-                    rgba(187, 124, 5, 0.08) 0%, 
-                    rgba(212, 150, 36, 0.05) 40%,
-                    transparent 80%);
+                background: radial-gradient(ellipse at top,
+                        rgba(187, 124, 5, 0.08) 0%,
+                        rgba(212, 150, 36, 0.05) 40%,
+                        transparent 80%);
             }
 
             &::after {
@@ -130,8 +143,8 @@ export default {
                 color: white;
                 transform: translateY(-5px) scale(1.05);
                 box-shadow: 0 6px 16px rgba(187, 124, 5, 0.55),
-                            0 3px 8px rgba(187, 124, 5, 0.4),
-                            0 1px 4px rgba(0, 0, 0, 0.2);
+                    0 3px 8px rgba(187, 124, 5, 0.4),
+                    0 1px 4px rgba(0, 0, 0, 0.2);
             }
 
             .nav__actionIcon {
@@ -139,15 +152,15 @@ export default {
                 fill: #bb7c05;
                 transform: scale(1.2) translateX(5px) rotate(15deg);
                 box-shadow: 0 3px 10px rgba(255, 255, 255, 0.95),
-                            0 1px 5px rgba(187, 124, 5, 0.3);
+                    0 1px 5px rgba(187, 124, 5, 0.3);
             }
         }
 
         &:active {
             transform: translateY(-6px) scale(1.01);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22),
-                        0 6px 12px rgba(0, 0, 0, 0.15),
-                        0 2px 6px rgba(0, 0, 0, 0.1);
+                0 6px 12px rgba(0, 0, 0, 0.15),
+                0 2px 6px rgba(0, 0, 0, 0.1);
         }
     }
 
@@ -157,8 +170,7 @@ export default {
         top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
-        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.3))
-                drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.3)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -202,13 +214,13 @@ export default {
         color: #bb7c05;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 3px 10px rgba(187, 124, 5, 0.2),
-                    0 1px 4px rgba(0, 0, 0, 0.12),
-                    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+            0 1px 4px rgba(0, 0, 0, 0.12),
+            inset 0 1px 3px rgba(255, 255, 255, 0.8);
         letter-spacing: 0.4px;
         position: relative;
         overflow: hidden;
         border: 1px solid rgba(187, 124, 5, 0.15);
-        
+
         &::before {
             content: '';
             position: absolute;
@@ -232,7 +244,7 @@ export default {
         padding: 6px;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 3px 12px rgba(187, 124, 5, 0.5),
-                    0 1px 5px rgba(0, 0, 0, 0.2);
+            0 1px 5px rgba(0, 0, 0, 0.2);
         flex-shrink: 0;
         position: relative;
         z-index: 1;
@@ -245,6 +257,7 @@ export default {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
