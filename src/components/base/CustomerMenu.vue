@@ -10,11 +10,11 @@
                             <span v-else class="menu__title">Henüz Giriş Yapmadın</span>
                         </div>
                         <div v-if="isLogin" class="menu__body">
-                            <router-link @click="close" to="/highway-burger/profile" class="menu__item" :class="{ '-active': activeRoute === 'Profile' }">
+                            <router-link @click="close" to="/profile" class="menu__item" :class="{ '-active': activeRoute === 'Profile' }">
                                 <UserIcon class="menu__itemIcon" />
                                 <span class="menu__text">Profilim</span>
                             </router-link>
-                            <router-link @click="close" to="/highway-burger/address" class="menu__item" :class="{ '-active': activeRoute === 'Address' }">
+                            <router-link @click="close" to="/address" class="menu__item" :class="{ '-active': activeRoute === 'Address' }">
                                 <AddressIcon class="menu__itemIcon" />
                                 <span class="menu__text">Adreslerim</span>
                             </router-link>
@@ -28,11 +28,11 @@
                             </div>
                         </div>
                         <div v-else class="menu__body">
-                            <router-link @click="close" to="/highway-burger/login" class="menu__item">
+                            <router-link @click="close" to="/login" class="menu__item">
                                 <LoginIcon class="menu__itemIcon" />
                                 <span class="menu__text">Giriş Yap</span>
                             </router-link>
-                            <router-link @click="close" to="/highway-burger/register" class="menu__item">
+                            <router-link @click="close" to="/register" class="menu__item">
                                 <RegisterIcon class="menu__itemIcon" />
                                 <span class="menu__text">Üye Ol</span>
                             </router-link>

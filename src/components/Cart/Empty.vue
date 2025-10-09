@@ -8,7 +8,7 @@
         <h2 class="empty__title">Sepetiniz Boş</h2>
         <p class="empty__text">Henüz sepetinizde ürün bulunmuyor</p>
         <p class="empty__subtitle">🍔 Lezzetli ürünlerimizi keşfedin!</p>
-        <router-link to="/highway-burger/" class="empty__link">
+        <router-link to="/" class="empty__link">
             <span class="empty__link-text">Kategorilere Git</span>
             <ArrowRightIcon class="empty__link-arrow" />
         </router-link>

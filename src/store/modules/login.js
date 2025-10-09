@@ -26,7 +26,7 @@ const login = {
                 dispatch('profile/fetchProfile', null, { root: true });
                 dispatch('cart/fetchCart', null, { root: true });
                 
-                setTimeout(() => router.push('/highway-burger/'), 1000);
+                setTimeout(() => router.push('/'), 1000);
                 return response.data;
             } catch (error) {
                 let message = 'Giriş sırasında bir hata oluştu!';
@@ -52,7 +52,7 @@ const login = {
             commit('cart/SET_BASKET', {}, { root: true });
             
             dispatch('notify/showNotify', { message: 'Çıkış yapıldı!', type: 'success' }, { root: true });
-            router.push('/highway-burger/');
+            router.push('/');
         }
     },
     getters: {

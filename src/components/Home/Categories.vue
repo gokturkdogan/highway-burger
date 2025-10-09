@@ -38,7 +38,7 @@ export default {
             const clickedCategory = this.categories.find(cat => cat.attributes.slug === slug);
             this.clickedId = clickedCategory.id;
             setTimeout(() => {
-                this.$router.push('/highway-burger/products/' + slug);
+                this.$router.push('/products/' + slug);
             }, 1000);
         }
     },

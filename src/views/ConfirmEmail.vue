@@ -2,7 +2,7 @@
     <div class="confirm">
         <SuccessIcon class="confirm__icon"/>
         <div class="confirm__text">E-mail doğrulaması başarılı</div>
-        <router-link class="confirm__login" to="/highway-burger/login">Hemen giriş yap <LoginIcon class="confirm__loginIcon"/></router-link>
+        <router-link class="confirm__login" to="/login">Hemen giriş yap <LoginIcon class="confirm__loginIcon"/></router-link>
     </div>
 </template>
 
