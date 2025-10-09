@@ -8,7 +8,7 @@
                 </div>
             </template>
             <template v-else>
-                <img class="nav__image" :src="cdnUrl + product.attributes.image.data.attributes.url" alt="burger">
+                <img class="nav__image" :src="product.attributes.image.data.attributes.url" alt="burger">
                 <div class="nav__itemContent">
                     <div class="nav__title">{{ product.attributes.name }}</div>
                     <div class="nav__subtitle">{{ product.attributes.description }}</div>
@@ -26,14 +26,11 @@
 <script>
 import BasketIcon from '../../assets/icons/basket-icon.vue'
 import ItemLoader from '../base/ItemLoader.vue'
-import { CDN_URL } from '../../config/_axios.js'
 
 export default {
     name: "ProductList",
     data() {
-        return {
-            cdnUrl: CDN_URL
-        }
+        return {}
     },
     components: {
         BasketIcon,

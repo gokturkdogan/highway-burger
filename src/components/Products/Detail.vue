@@ -59,7 +59,6 @@
 
 <script>
 import Modal from '../base/Modal.vue'
-import { CDN_URL } from '../../config/_axios.js'
 
 export default {
     name: "Detail",
@@ -84,7 +83,7 @@ export default {
         },
         productImage() {
             const imageUrl = this.selectedProduct?.attributes?.image?.data?.attributes?.url;
-            return imageUrl ? `${CDN_URL}${imageUrl}` : '';
+            return imageUrl || '';
         },
         categoryName() {
             return this.selectedProduct?.attributes?.category?.data?.attributes?.name || '';

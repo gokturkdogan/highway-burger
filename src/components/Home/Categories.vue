@@ -1,7 +1,7 @@
 <template>
     <div class="nav">
         <router-link v-for="category in categories" :key="category.id" :to="'/highway-burger/products/' + category.attributes.slug" class="nav__item">
-            <img class="nav__image" :src="cdnUrl + category.attributes.image.data.attributes.url" alt="burger">
+            <img class="nav__image" :src="category.attributes.image.data.attributes.url" alt="burger">
             <div class="nav__itemContent">
                 <div class="nav__title">{{ category.attributes.name }}</div>
                 <div class="nav__subtitle">{{ category.attributes.description }}</div>
@@ -15,14 +15,11 @@
 </template>
 <script>
 import PointerIcon from '../../assets/icons/pointer-icon.vue'
-import { CDN_URL } from '../../config/_axios.js'
 
 export default {
     name: "Categories",
     data() {
-        return {
-            cdnUrl: CDN_URL
-        }
+        return {}
     },
     components: {
         PointerIcon
