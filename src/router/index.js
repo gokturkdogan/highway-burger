@@ -10,45 +10,45 @@ import Cart from '../views/Cart.vue';
 
 const routes = [
   {
-    path: '/highway-burger/',
+    path: '/',
     name: 'Home',
     component: Home,
   },
   {
-    path: '/highway-burger/products/:categorySlug',
+    path: '/products/:categorySlug',
     name: 'Products',
     component: Products,
     props: true,
   },
   {
-    path: '/highway-burger/login',
+    path: '/login',
     name: 'Login',
     component: Login,
   },
   {
-    path: '/highway-burger/register',
+    path: '/register',
     name: 'Register',
     component: Register,
   },
   {
-    path: '/highway-burger/confirm',
+    path: '/confirm',
     name: 'Confirm',
     component: Confirm,
   },
   {
-    path: '/highway-burger/profile',
+    path: '/profile',
     name: 'Profile',
     component: Profile,
     meta: { title: 'Profilim' }
   },
   {
-    path: '/highway-burger/address',
+    path: '/address',
     name: 'Address',
     component: Address,
     meta: { title: 'Adreslerim' }
   },
   {
-    path: '/highway-burger/cart',
+    path: '/cart',
     name: 'Cart',
     component: Cart,
     meta: { title: 'Sepetim' }
