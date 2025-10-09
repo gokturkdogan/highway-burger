@@ -314,19 +314,6 @@ export default {
   }
 }
 
-@keyframes badgePulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 5px 18px rgba(239, 68, 68, 0.65),
-                0 0 0 3px white;
-  }
-  50% {
-    transform: scale(1.18);
-    box-shadow: 0 7px 22px rgba(239, 68, 68, 0.8),
-                0 0 0 3px white;
-  }
-}
-
 @keyframes activeGlow {
   0%, 100% {
     opacity: 1;

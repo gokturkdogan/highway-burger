@@ -75,14 +75,8 @@ const cart = {
       try {
         const token = localStorage.getItem('jwt');
         const userId = rootState.profile.profile.id;
-        
-        // Mevcut basket'i al veya boş obje oluştur
         const currentBasket = state.basket || {};
-        
-        // products array'ini al veya boş array oluştur
         const currentProducts = currentBasket.products || [];
-        
-        // Aynı ürün var mı kontrol et (productId + priceOption + category ile)
         const existingProductIndex = currentProducts.findIndex(item => 
           item.productId === product.productId && 
           item.priceOption === product.priceOption
@@ -91,7 +85,6 @@ const cart = {
         let updatedProducts;
         
         if (existingProductIndex !== -1) {
-          // Ürün zaten var, quantity'sini arttır
           updatedProducts = currentProducts.map((item, index) => {
             if (index === existingProductIndex) {
               return {
@@ -102,11 +95,8 @@ const cart = {
             return item;
           });
         } else {
-          // Yeni ürün, ekle
           updatedProducts = [...currentProducts, product];
         }
-        
-        // Güncellenmiş basket objesi
         const updatedBasket = {
           ...currentBasket,
           products: updatedProducts
