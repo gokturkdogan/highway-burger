@@ -193,19 +193,22 @@ export default {
     color: white;
     font-size: 13px;
     font-weight: 800;
-    width: 10px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 7px;
+    padding: 0;
     box-shadow: 0 5px 18px rgba(239, 68, 68, 0.65),
                 0 0 0 3px white,
                 inset 0 1px 3px rgba(255, 255, 255, 0.5);
     animation: badgePulse 2s ease-in-out infinite;
     border: 3px solid white;
     letter-spacing: -0.5px;
+    min-width: 20px;
+    text-align: center;
+    line-height: 1;
   }
 
   &__side {
@@ -382,8 +385,8 @@ export default {
     }
 
     &__badge {
-      width: 10px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
       font-size: 12px;
       top: -6px;
       right: -6px;
@@ -426,8 +429,8 @@ export default {
     }
 
     &__badge {
-      width: 10px;
-      height: 22px;
+      width: 16px;
+      height: 16px;
       font-size: 11px;
       top: -5px;
       right: -5px;
