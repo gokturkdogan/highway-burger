@@ -3,27 +3,91 @@
     <div class="header__banner">
         <img class="header__logo" src="../../assets/images/splash.png" alt="logo">
         <h1 class="header__title">{{ title }}</h1>
-        <UserIcon @click="openMenu" class="header__user"/>
+        
+        <!-- Desktop Navigation -->
+        <nav class="header__nav">
+          <router-link to="/" class="header__navLink" :class="{ '-active': activeRoute === 'Home' }">
+            <HomeIcon/>
+            <span>Ana Sayfa</span>
+          </router-link>
+          <router-link @click="setProducts('burgers')" to="/products/burgers" class="header__navLink" :class="{ '-active': activeRoute === 'burgers' }">
+            <BurgerIcon/>
+            <span>Burgerler</span>
+          </router-link>
+          <router-link @click="setProducts('toastes')" to="/products/toastes" class="header__navLink" :class="{ '-active': activeRoute === 'toastes' }">
+            <ToastIcon/>
+            <span>Tostlar</span>
+          </router-link>
+          <router-link @click="setProducts('sandwiches')" to="/products/sandwiches" class="header__navLink" :class="{ '-active': activeRoute === 'sandwiches' }">
+            <SandwichIcon/>
+            <span>Sandviçler</span>
+          </router-link>
+          <router-link @click="setProducts('menus')" to="/products/menus" class="header__navLink" :class="{ '-active': activeRoute === 'menus' }">
+            <MenuIcon/>
+            <span>Menüler</span>
+          </router-link>
+          <router-link @click="setProducts('drinks')" to="/products/drinks" class="header__navLink" :class="{ '-active': activeRoute === 'drinks' }">
+            <DrinkIcon/>
+            <span>İçecekler</span>
+          </router-link>
+        </nav>
+
+        <div class="header__actions">
+          <!-- Sepet Butonu -->
+          <router-link to="/cart" class="header__cart" :class="{ '-has-items': cartItemCount > 0 }">
+            <BasketIcon/>
+            <span v-if="cartItemCount > 0" class="header__cartBadge">{{ cartItemCount }}</span>
+          </router-link>
+          
+          <!-- Profil Butonu -->
+          <UserIcon @click="openMenu" class="header__user"/>
+        </div>
     </div>
   </div>
 </template>
 <script>
 import UserIcon from '../../assets/icons/user-icon.vue'
 import BurgerIcon from '../../assets/icons/burger-icon.vue'
+import BasketIcon from '../../assets/icons/basket-icon.vue'
+import HomeIcon from '../../assets/icons/home-icon.vue'
+import ToastIcon from '../../assets/icons/toast-icon.vue'
+import SandwichIcon from '../../assets/icons/sandwich-icon.vue'
+import MenuIcon from '../../assets/icons/menu-icon.vue'
+import DrinkIcon from '../../assets/icons/drink-icon.vue'
+
 export default {
   name: "Header",
   components: {
     UserIcon,
-    BurgerIcon
+    BurgerIcon,
+    BasketIcon,
+    HomeIcon,
+    ToastIcon,
+    SandwichIcon,
+    MenuIcon,
+    DrinkIcon
   },
   computed: {
     title() {
       return this.$route.meta.title || 'Highway Burger'
+    },
+    activeRoute() {
+      return this.$route.name === 'Home' ? 'Home' : this.$route.params.categorySlug;
+    },
+    basket() {
+      return this.$store.getters['cart/getBasket'];
+    },
+    cartItemCount() {
+      const products = this.basket?.products || [];
+      return products.length;
     }
   },
   methods: {
     openMenu() {
       this.$store.dispatch('openMenu')
+    },
+    setProducts(category) {
+      this.$store.dispatch('product/fetchProducts', category)
     }
   },
 };
@@ -142,27 +206,127 @@ export default {
     }
 
     &__nav {
-        margin-top: 40px;
-        display: flex;
-        gap: 10px;
-        overflow-x: scroll;
+        display: none; // Mobilde gizli
+        gap: 8px;
+        align-items: center;
     }
 
-    &__navItem {
+    &__navLink {
         display: flex;
         align-items: center;
-        background-color: rgb(187, 124, 5);
-        padding: 5px;
-        border-radius: 30px;
-        gap: 5px;
-        font-size: 12px;
-        color: white;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #6c757d;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        background: transparent;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: #6c757d;
+            transition: all 0.3s ease;
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, rgba(187, 124, 5, 0.1) 0%, rgba(187, 124, 5, 0.05) 100%);
+            color: #bb7c05;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(187, 124, 5, 0.15);
+
+            svg {
+                fill: #bb7c05;
+                transform: scale(1.1);
+            }
+        }
+
+        &.-active {
+            background: linear-gradient(135deg, rgba(187, 124, 5, 0.15) 0%, rgba(187, 124, 5, 0.08) 100%);
+            color: #bb7c05;
+            box-shadow: inset 0 2px 8px rgba(187, 124, 5, 0.15);
+
+            svg {
+                fill: #bb7c05;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 4px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60%;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, #bb7c05, transparent);
+                border-radius: 2px;
+                animation: navGlow 2s ease-in-out infinite;
+            }
+        }
     }
 
-    &__navIcon {
-        width: 30px;
-        background-color: white;
-        border-radius: 100%;
+    &__actions {
+        display: none; // Mobilde gizli, sadece user icon görünür
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__cart {
+        position: relative;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #bb7c05 0%, #d49624 100%);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(187, 124, 5, 0.3);
+        text-decoration: none;
+
+        svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            transition: all 0.3s ease;
+        }
+
+        &:hover, &.-has-items {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(187, 124, 5, 0.45);
+
+            svg {
+                transform: scale(1.15) rotate(5deg);
+            }
+        }
+
+        &:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+    }
+
+    &__cartBadge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #ef4444;
+        color: white;
+        font-size: 11px;
+        font-weight: 800;
+        min-width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+        border: 3px solid white;
+        letter-spacing: -0.5px;
+        animation: badgePulse 2s ease-in-out infinite;
     }
 }
 
@@ -223,6 +387,55 @@ export default {
     }
 }
 
+@keyframes navGlow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+// Desktop için özel stiller
+@media (min-width: 769px) {
+    .header {
+        padding: 15px 30px;
+
+        &__banner {
+            max-width: 1400px;
+        }
+
+        &__title {
+            display: none; // Desktop'ta title'ı gizle, navigation var çünkü
+        }
+
+        &__nav {
+            display: flex; // Desktop'ta göster
+            flex: 1;
+            justify-content: center;
+            margin: 0 20px;
+        }
+
+        &__actions {
+            display: flex; // Desktop'ta göster
+        }
+
+        &__user {
+            width: 45px;
+            height: 45px;
+        }
+    }
+}
+
 // Responsive
 @media (max-width: 768px) {
     .header {
@@ -241,6 +454,11 @@ export default {
         &__user {
             width: 40px;
             height: 40px;
+        }
+
+        &__nav,
+        &__actions {
+            display: none; // Mobilde gizle
         }
     }
 }

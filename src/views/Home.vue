@@ -65,4 +65,11 @@ export default {
     height: 60vh;
   }
 }
+
+// Desktop için padding
+@media (min-width: 769px) {
+  .home {
+    padding: 20px 0;
+  }
+}
 </style>

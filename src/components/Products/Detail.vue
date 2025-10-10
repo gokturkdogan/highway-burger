@@ -1,6 +1,6 @@
 <template>
-    <transition name="slide-up">
-        <Modal v-if="isOpen" :title="productTitle" variant="addAddress" @close-modal="closeModal">
+    <transition :name="isDesktop ? 'modal-fade' : 'slide-up'">
+        <Modal v-if="isOpen" :title="productTitle" variant="productDetail" @close-modal="closeModal">
             <template #body>
                 <div class="productDetail" v-if="selectedProduct && selectedProduct.attributes">
                     <div class="productDetail__image">
@@ -102,6 +102,9 @@ export default {
     computed: {
         isOpen() {
             return this.$store.getters["product/getIsDetailModalOpen"];
+        },
+        isDesktop() {
+            return window.innerWidth >= 769;
         },
         selectedProduct() {
             return this.$store.getters["product/getSelectedProduct"];
@@ -805,5 +808,131 @@ export default {
             font-size: 14px;
         }
     }
+}
+
+// Desktop için özel stiller
+@media (min-width: 769px) {
+    .productDetail {
+        gap: 14px;
+        flex-direction: row; // Desktop'ta yan yana
+        
+        &__image {
+            height: 160px;
+            border-radius: 16px;
+            flex: 0 0 160px; // Sabit genişlik
+        }
+
+        &__content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        &__header {
+            margin-bottom: 8px;
+        }
+
+        &__name {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        &__category {
+            font-size: 10px;
+            padding: 3px 8px;
+        }
+
+        &__description {
+            font-size: 12px;
+            line-height: 1.4;
+            padding: 8px 10px;
+            margin-bottom: 8px;
+        }
+
+        &__extra {
+            padding: 6px 10px;
+            margin-bottom: 8px;
+        }
+
+        &__pricing {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        &__price {
+            padding: 8px 10px;
+            
+            &-label {
+                font-size: 9px;
+            }
+            
+            &-value {
+                font-size: 15px;
+            }
+        }
+
+        &__quantity {
+            padding: 8px 10px;
+            margin-bottom: 10px;
+        }
+
+        &__quantityBtn {
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+        }
+
+        &__quantityLabel {
+            font-size: 9px;
+        }
+
+        &__quantityNumber {
+            font-size: 18px;
+        }
+
+        &__addButton {
+            padding: 10px 18px;
+            font-size: 14px;
+        }
+    }
+}
+
+// Büyük ekranlar için
+@media (min-width: 1200px) {
+    .productDetail {
+        gap: 16px;
+        
+        &__image {
+            height: 180px;
+            flex: 0 0 180px;
+        }
+
+        &__name {
+            font-size: 20px;
+        }
+
+        &__description {
+            font-size: 13px;
+        }
+
+        &__price {
+            &-value {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+// Desktop için özel transition
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+    opacity: 0;
 }
 </style>

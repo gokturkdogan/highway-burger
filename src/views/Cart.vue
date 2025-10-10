@@ -5,13 +5,19 @@
     <div v-else class="cart__container">
       <div class="cart__content">
         <CartEmpty v-if="isEmpty" />
-        <CartList 
-          v-else
-          :products="products" 
-          @increase-quantity="increaseQuantity"
-          @decrease-quantity="decreaseQuantity"
-          @remove-item="removeItem"
-        />
+        <div v-else class="cart__layout">
+          <div class="cart__items">
+            <CartList 
+              :products="products" 
+              @increase-quantity="increaseQuantity"
+              @decrease-quantity="decreaseQuantity"
+              @remove-item="removeItem"
+            />
+          </div>
+          <div class="cart__summary">
+            <CartSummary />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +27,7 @@
 import BurgerSpinner from '../components/base/BurgerSpinner.vue';
 import CartList from '../components/Cart/List.vue';
 import CartEmpty from '../components/Cart/Empty.vue';
+import CartSummary from '../components/Cart/Summary.vue';
 
 export default {
   name: "Cart",
@@ -30,7 +37,8 @@ export default {
   components: {
     BurgerSpinner,
     CartList,
-    CartEmpty
+    CartEmpty,
+    CartSummary
   },
   created() {
     this.$store.dispatch('cart/fetchCart');
@@ -117,6 +125,42 @@ export default {
     margin: 0 auto;
     padding-bottom: 300px;
   }
+
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__items {
+    width: 100%;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding: 20px 20px 20px 0;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #bb7c05;
+      border-radius: 3px;
+      
+      &:hover {
+        background: #a66b04;
+      }
+    }
+  }
+
+  &__summary {
+    display: none; // Mobilde gizli
+  }
 }
 
 @media (max-width: 1024px) {
@@ -130,6 +174,33 @@ export default {
 @media (max-width: 768px) {
   .cart {
     padding: 16px;
+    
+    &__content {
+      padding-bottom: 200px;
+    }
+  }
+}
+
+// Desktop için iki sütunlu layout
+@media (min-width: 769px) {
+  .cart {
+    padding: 30px 20px;
+    padding-bottom: 60px;
+
+    &__content {
+      padding-bottom: 200px;
+    }
+
+    &__layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    &__summary {
+      display: block; // Desktop'ta göster
+    }
   }
 }
 </style>

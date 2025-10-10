@@ -41,4 +41,44 @@ export default {
   left: 0;
   overflow-y: scroll;
 }
+
+// Pre-login sayfaları için (Login, Register, Confirm)
+.content:has(.login),
+.content:has(.register),
+.content:has(.confirm) {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  background: #FFFEFE;
+}
+
+// Desktop için layout
+@media (min-width: 769px) {
+  .content {
+    top: 90px; // Header biraz daha büyük desktop'ta
+    bottom: 0; // AppBar yok, bottom padding kaldır
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  // Pre-login sayfaları desktop'ta da tam ekran
+  .content:has(.login),
+  .content:has(.register),
+  .content:has(.confirm) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    background: #FFFEFE;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+}
 </style>

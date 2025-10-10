@@ -161,5 +161,100 @@ export default {
             }
         }
     }
+
+    &.-productDetail {
+        #{$self} {
+            &__wrapper {
+                border-radius: 24px;
+                max-width: 800px;
+                width: 90%;
+                max-height: 80%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &__header {
+                border-radius: 24px 24px 0 0;
+                padding: 20px 24px 15px;
+            }
+
+            &__body {
+                padding: 0 24px 20px;
+            }
+
+            &__footer {
+                padding: 20px 24px 24px;
+                border-radius: 0 0 24px 24px;
+            }
+        }
+
+        // Desktop için özel stiller - overlay direkt görünür, wrapper kayarak gelir
+        @media (min-width: 769px) {
+            #{$self} {
+                &__overlay {
+                    opacity: 1; // Overlay direkt görünür
+                    animation: fadeIn 0.3s ease-out;
+                }
+
+                &__wrapper {
+                    max-width: 600px;
+                    width: 85%;
+                    max-height: 75%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    opacity: 0;
+                    animation: slideInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+                }
+
+                &__header {
+                    padding: 24px 28px 18px;
+                }
+
+                &__body {
+                    padding: 0 28px 24px;
+                }
+
+                &__footer {
+                    padding: 24px 28px 28px;
+                }
+            }
+        }
+
+        // Büyük ekranlar için
+        @media (min-width: 1200px) {
+            #{$self} {
+                &__wrapper {
+                    max-width: 700px;
+                    width: 80%;
+                }
+            }
+        }
+    }
+
+    // Desktop için animasyonlar
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInScale {
+        0% {
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.05);
+            opacity: 0.8;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    }
 }
 </style>

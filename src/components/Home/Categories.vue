@@ -387,4 +387,73 @@ export default {
         }
     }
 }
+
+// Desktop için grid layout
+@media (min-width: 769px) {
+    .nav {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        padding-bottom: 50px;
+
+        &__item {
+            min-height: 160px;
+            padding: 14px;
+            border-radius: 22px;
+            margin-top: 60px;
+
+            &:hover,
+            &.-clicked {
+                transform: translateY(-12px) scale(1.03);
+                
+                .nav__image {
+                    transform: translate(-50%, -50%) scale(1.2) rotate(-7deg);
+                }
+
+                .nav__action {
+                    transform: translateY(-5px) scale(1.06);
+                }
+
+                .nav__actionIcon {
+                    transform: scale(1.25) translateX(5px) rotate(18deg);
+                }
+            }
+        }
+
+        &__image {
+            width: 125px;
+        }
+
+        &__itemContent {
+            margin-top: 50px;
+        }
+
+        &__title {
+            font-size: 16px;
+        }
+
+        &__subtitle {
+            font-size: 11px;
+            margin-bottom: 14px;
+        }
+
+        &__action {
+            padding: 10px 14px;
+            font-size: 11px;
+        }
+
+        &__actionIcon {
+            width: 28px;
+            height: 28px;
+        }
+    }
+}
+
+// Çok büyük ekranlar için 4 sütunlu grid
+@media (min-width: 1400px) {
+    .nav {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        padding-bottom: 60px;
+    }
+}
 </style>

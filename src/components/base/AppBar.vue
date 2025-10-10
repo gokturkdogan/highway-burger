@@ -434,5 +434,12 @@ export default {
     }
   }
 }
+
+// Desktop için AppBar'ı gizle
+@media (min-width: 769px) {
+  .appBar {
+    display: none;
+  }
+}
 </style>
   

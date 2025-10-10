@@ -386,4 +386,157 @@ export default {
         }
     }
 }
+
+// Desktop için grid layout
+@media (min-width: 769px) {
+    .nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 0 0 30px 0;
+
+        &__item {
+            min-height: 110px;
+            padding: 12px 12px 12px 55px; // Sol taraftan görseller için padding
+            margin-top: 20px;
+            border-radius: 18px;
+            transform: translateX(0) scale(1);
+
+            // 2'nin katları olan sıralardaki itemlere soldan margin
+            &:nth-child(2n) {
+                margin-left: 40px;
+            }
+
+            &:hover {
+                transform: translateY(-6px) scale(1.02);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22),
+                            0 8px 20px rgba(0, 0, 0, 0.16),
+                            0 4px 10px rgba(187, 124, 5, 0.2);
+                
+                .nav__image {
+                    transform: translate(-50%, -50%) scale(1.2) rotate(-5deg);
+                }
+
+                .nav__actionIcon {
+                    transform: scale(1.1) rotate(10deg);
+                }
+            }
+
+            &.-sandwich {
+                min-height: 95px;
+                padding: 10px 12px 10px 52px;
+            }
+
+            &.-drink {
+                min-height: 80px;
+                padding: 10px 12px 10px 48px;
+            }
+
+            &.-toast {
+                min-height: 88px;
+                padding: 10px 12px 10px 50px;
+            }
+        }
+
+        &__image {
+            width: 95px;
+            left: 0; // Görseli tam sol kenara yerleştir
+        }
+
+        &__itemContent {
+            margin-left: 0; // Padding yeterli
+        }
+
+        &__title {
+            font-size: 14px;
+        }
+
+        &__subtitle {
+            font-size: 11px;
+            max-width: 90%;
+        }
+
+        &__price {
+            font-size: 14px;
+        }
+
+        &__suffix {
+            font-size: 10px;
+            padding: 3px 6px;
+        }
+
+        &__actionIcon {
+            width: 34px;
+            height: 34px;
+            padding: 8px;
+        }
+
+        &__action {
+            right: 8px;
+        }
+    }
+}
+
+// Büyük ekranlar için 2 sütunlu grid
+@media (min-width: 1200px) {
+    .nav {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        padding-bottom: 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+
+        &__item {
+            min-height: 120px;
+            padding: 14px 14px 14px 60px;
+            margin-top: 22px;
+
+            // 2'nin katları olan sıralardaki itemlere soldan margin
+            &:nth-child(2n) {
+                margin-left: 40px;
+            }
+
+            &.-sandwich {
+                min-height: 105px;
+                padding: 12px 14px 12px 56px;
+            }
+
+            &.-drink {
+                min-height: 90px;
+                padding: 11px 14px 11px 52px;
+            }
+
+            &.-toast {
+                min-height: 98px;
+                padding: 12px 14px 12px 54px;
+            }
+        }
+
+        &__image {
+            width: 105px;
+            left: 0;
+        }
+
+        &__itemContent {
+            margin-left: 0;
+        }
+
+        &__title {
+            font-size: 15px;
+        }
+
+        &__subtitle {
+            font-size: 12px;
+        }
+
+        &__price {
+            font-size: 15px;
+        }
+
+        &__actionIcon {
+            width: 36px;
+            height: 36px;
+        }
+    }
+}
 </style>

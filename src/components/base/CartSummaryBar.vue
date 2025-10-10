@@ -453,5 +453,12 @@ export default {
     }
   }
 }
+
+// Desktop için CartSummaryBar - sadece mobilde göster
+@media (min-width: 769px) {
+  .cartSummaryBar {
+    display: none; // Desktop'ta gizle
+  }
+}
 </style>
 

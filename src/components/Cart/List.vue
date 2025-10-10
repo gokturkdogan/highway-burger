@@ -633,4 +633,109 @@ export default {
     }
   }
 }
+
+// Desktop için grid layout
+@media (min-width: 769px) {
+  .cartList {
+    &__items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+
+  .cartItem {
+    margin-bottom: 0;
+    border-radius: 16px;
+
+    &:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    &__image {
+      height: 110px;
+    }
+
+    &__content {
+      padding: 12px;
+      gap: 10px;
+    }
+
+    &__name {
+      font-size: 16px;
+    }
+
+    &__category {
+      font-size: 10px;
+      padding: 4px 10px;
+    }
+
+    &__option {
+      font-size: 10px;
+      padding: 4px 9px;
+    }
+
+    &__pricing {
+      padding: 8px 12px;
+    }
+
+    &__price-label {
+      font-size: 10px;
+    }
+
+    &__price {
+      font-size: 16px;
+    }
+
+    &__total {
+      padding: 10px 12px;
+    }
+
+    &__total-label {
+      font-size: 11px;
+    }
+
+    &__total-value {
+      font-size: 18px;
+    }
+
+    &__quantity {
+      max-width: 160px;
+      padding: 8px 12px;
+      gap: 10px;
+
+      &-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+      }
+
+      &-value {
+        font-size: 16px;
+        min-width: 30px;
+      }
+    }
+
+    &__remove {
+      max-width: 130px;
+      padding: 8px 12px;
+      font-size: 11px;
+
+      &-icon {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
+
+// Büyük ekranlar için 3 sütunlu grid
+@media (min-width: 1200px) {
+  .cartList {
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+  }
+}
 </style>
