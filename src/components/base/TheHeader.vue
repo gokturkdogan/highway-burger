@@ -456,9 +456,16 @@ export default {
             height: 40px;
         }
 
-        &__nav,
-        &__actions {
+        &__nav {
             display: none; // Mobilde gizle
+        }
+        
+        &__actions {
+            display: flex; // Mobilde user icon görünsün
+        }
+        
+        &__cart {
+            display: none; // Mobilde sepet butonunu gizle
         }
     }
 }
